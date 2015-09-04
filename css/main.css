@@ -39,18 +39,16 @@ h5 {
   font-size:2em;
 }
 
-a, a:visited, a:active, a:focus {
+i {
+  margin: 0 0.2em;
+}
+
+a, a:visited, a:active, a:focus, i {
 	color:black;
 	text-decoration: none;
   font-family: "Montserrat", Helvetica, sans-serif;
-  -webkit-transition: color 0.6s ease; /* For Safari 3.1 to 6.0 */
-  transition: color 0.6s ease;
-  margin:0 0.2em 0 0.2em;
-}
-
-i {
-  -webkit-transition: color 0.6s ease; /* For Safari 3.1 to 6.0 */
-  transition: color 0.6s ease;
+  -webkit-transition: color 0.3s ease; /* For Safari 3.1 to 6.0 */
+  transition: color 0.3s ease;
 }
 
 a:hover, i:hover {
@@ -59,6 +57,7 @@ a:hover, i:hover {
 }
 
 #resume {
+  margin-top: 10px;
   display:block;
 }
 
