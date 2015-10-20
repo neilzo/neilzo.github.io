@@ -4,18 +4,21 @@
 }
 
 @font-face {
-  font-family: "BebasBook";
-  src: url(../fonts/BebasNeueBook.ttf) format('truetype');
-  font-weight: bolder;
-}
-
-@font-face {
   font-family: "Montserrat";
   src: url(../fonts/Montserrat-Regular.otf);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
 	font-size:16px;
+}
+
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 h1 {
@@ -23,24 +26,19 @@ h1 {
 	font-weight: bold;
   font-family: "Bebas Neue", Helvetica, sans-serif;
 	letter-spacing: 5px;
-	font-size:10em;
+	font-size: 10em;
   margin:0;
 }
 
 h3 {
   font-size:4em;
-  font-family: "BebasBook", Helvetica, sans-serif;
-  font-weight: bold;
+  font-family: "Bebas Neue", Helvetica, sans-serif;
   text-align: center;
 }
 
 h5 {
-  font-family: "BebasBook", Helvetica, sans-serif;
-  font-size:2em;
-}
-
-i {
-  margin: 0 0.2em;
+  font-family: "Bebas Neue", Helvetica, sans-serif;
+  font-size: 2em;
 }
 
 a, a:visited, a:active, a:focus, i {
@@ -62,16 +60,12 @@ a:hover, i:hover {
 }
 
 ul {
-	list-style:none;
-  font-family: "BebasBook";
-  font-size:3em;
+	list-style: none;
+  font-family: "Bebas Neue";
+  font-size: 3em;
   text-align: center;
-  margin:0;
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
-  -webkit-margin-start: 0;
-  -webkit-margin-end: 0;
-  -webkit-padding-start: 0;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -96,7 +90,12 @@ li {
   margin-bottom:1.5em;
 }
 
-@media only screen and (max-width: 768px) {
+.social a {
+  padding: 5px;
+  margin-right: 1em;
+}
+
+@media only screen and (max-width: 767px) {
   h1 {
     font-size:6em;
   }
