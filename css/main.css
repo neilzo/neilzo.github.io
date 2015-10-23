@@ -16,9 +16,9 @@ html {
 	font-size:16px;
 }
 
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+html, body {
+  margin: 0;
+  height: 100%;
 }
 
 h1 {
@@ -54,11 +54,6 @@ a:hover, i:hover {
 	color:red;
 }
 
-#resume {
-  margin-top: 10px;
-  display:block;
-}
-
 ul {
 	list-style: none;
   font-family: "Bebas Neue";
@@ -70,6 +65,17 @@ ul {
 
 li {
   display:inline-block;
+}
+
+.wrap {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .about-text {
@@ -95,6 +101,15 @@ li {
   margin-right: 1em;
 }
 
+.projects {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.projects a {
+  font-size: 2em;
+}
+
 @media only screen and (max-width: 767px) {
   h1 {
     font-size:6em;
@@ -110,5 +125,8 @@ li {
   }
   ul {
     font-size:2.5em;
+  }
+  .projects a {
+    font-size: 1.5em;
   }
 }
