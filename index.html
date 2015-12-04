@@ -28,10 +28,10 @@
           <a href="//twitter.com/neilzo" data-event="Twitter" class="link" target="_blank">
             <i class="fa fa-twitter fa-2x"></i>
           </a>
-          <a href="//codepen.io/neilzo" data-event="Codpen" class="link" target="_blank">
+          <a href="//codepen.io/neilzo" data-event="CodePen" class="link" target="_blank">
             <i class="fa fa-codepen fa-2x"></i>
           </a>
-          <a href="//www.linkedin.com/in/neildaftary" data-event="Linkedin" class="link" target="_blank">
+          <a href="//www.linkedin.com/in/neildaftary" data-event="LinkedIn" class="link" target="_blank">
             <i class="fa fa-linkedin fa-2x"></i>
           </a>
         </div>
@@ -39,10 +39,10 @@
       
       <div class="row projects">
         <div class="col-xs-6">
-          <a href="//croscon.com" data-events="Professional" class="link">Professional</a>
+          <a href="//croscon.com" data-event="Professional" class="link" target="_blank">Professional</a>
         </div>
         <div class="col-xs-6">
-          <a href="//spaceowl.co" data-events="Personal" class="link">Personal</a>
+          <a href="//spaceowl.co" data-event="Personal" class="link" target="_blank">Personal</a>
         </div>
       </div>
     </section>
@@ -57,7 +57,7 @@
       ga('create','UA-40533751-2','auto');ga('send','pageview');
       
       function handleClick(e){
-        var eType = e.target.dataset.events;
+        var eType = e.target.dataset.event;
 
         try {
           ga('send', 'event', 'Clicks Out', 'click', eType)
