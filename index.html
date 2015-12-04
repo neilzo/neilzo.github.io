@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Neil Daftary</title>
-  <meta name="description" content="Neil Daftary | I'm an aspiring fullstack developer from NYC.">
+  <meta name="description" content="Neil Daftary | I'm an aspiring software engineer from NYC.">
   <link rel="author" href="https://plus.google.com/103621734154703950582/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,16 +22,16 @@
           <h1>Neil Daftary</h1>
         </section>
         <div class="col-xs-12 social">
-          <a href="//github.com/neilzo" target="_blank">
+          <a href="//github.com/neilzo" data-event="GitHub" class="link" target="_blank">
             <i class="fa fa-github-alt fa-2x"></i>
           </a>
-          <a href="//twitter.com/neilzo" target="_blank">
+          <a href="//twitter.com/neilzo" data-event="Twitter" class="link" target="_blank">
             <i class="fa fa-twitter fa-2x"></i>
           </a>
-          <a href="//codepen.io/neilzo" target="_blank">
+          <a href="//codepen.io/neilzo" data-event="Codpen" class="link" target="_blank">
             <i class="fa fa-codepen fa-2x"></i>
           </a>
-          <a href="//www.linkedin.com/in/neildaftary" target="_blank">
+          <a href="//www.linkedin.com/in/neildaftary" data-event="Linkedin" class="link" target="_blank">
             <i class="fa fa-linkedin fa-2x"></i>
           </a>
         </div>
@@ -39,10 +39,10 @@
       
       <div class="row projects">
         <div class="col-xs-6">
-          <a href="//croscon.com">Professional</a>
+          <a href="//croscon.com" data-events="Professional" class="link">Professional</a>
         </div>
         <div class="col-xs-6">
-          <a href="//spaceowl.co">Personal</a>
+          <a href="//spaceowl.co" data-events="Personal" class="link">Personal</a>
         </div>
       </div>
     </section>
@@ -55,6 +55,23 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-40533751-2','auto');ga('send','pageview');
+      
+      function handleClick(e){
+        e.preventDefault();
+
+        var eType = e.target.dataset.events;
+
+        try {
+          ga('send', 'event', 'Clicks Out', 'click', eType)
+        } catch(e) {
+          //noop
+        }
+      }
+
+      for (var i = 0; i < document.getElementsByClassName('link').length; i++) {
+        document.getElementsByClassName('link')[i].addEventListener('click', handleClick);
+      };
+
   </script>
 </body>
 </html>
