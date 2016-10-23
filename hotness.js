@@ -53,14 +53,14 @@
         this.opacity = opacity;
     }
 
+    filledRect.prototype.draw = function() {
+        randomColor();
+    }
+
     /*** START to be evetually removed ***/
     function randomColor() {
         ctx.fillStyle = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' +
             Math.floor(Math.random() * 255) + ')';
-    }
-
-    filledRect.prototype.draw = function() {
-        randomColor();
     }
 
     function randFilledRect(e) {
