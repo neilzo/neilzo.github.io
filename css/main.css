@@ -89,7 +89,6 @@ li {
     font-size: 9rem;
   }
   .link__icon {
-    font-size: 1.5rem;
     margin: 0 0.75rem;
   }
 }
@@ -99,7 +98,8 @@ li {
     font-size: 12rem;
   }
   .link__icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin: 0 1rem;
   }
 }
 
