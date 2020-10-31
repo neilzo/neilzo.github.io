@@ -17,6 +17,8 @@ html {
   font-size: 16px;
   height: 100%;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -84,31 +86,41 @@ li {
   color: red;
 }
 
+@media (max-width: 400px) {
+  .wrap {
+    padding: 0 0.5rem;
+  }
+  h1 {
+   letter-spacing: 0; 
+  }
+  .link__icon {
+    padding: 0;
+    margin: 0 0.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 9rem;
   }
   .link__icon {
+    font-size: 1.125rem;
     margin: 0 0.75rem;
   }
 }
 
 @media (min-width: 1440px) {
-  h1 {
-    font-size: 12rem;
-  }
   .link__icon {
-    font-size: 1.5rem;
     margin: 0 1rem;
   }
 }
 
 @media (min-width: 1920px) {
   h1 {
-    font-size: 16rem;
+    font-size: 12rem;
   }
   .link__icon {
-    margin: 0 1.5rem;
+    font-size: 1.333rem;
   }
 }
 
