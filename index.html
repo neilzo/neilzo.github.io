@@ -1,12 +1,13 @@
 <!doctype html>
-
-<head lang="en">
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <title>Neil Daftary</title>
   <meta name="description" content="Neil Daftary | Software engineer residing (and presiding) in NYC.">
   <meta name="subject" content="Neil Daftary">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- OpenGraph stuffs -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Neil Daftary">
   <meta property="og:description" content="Neil Daftary | Software engineer residing (and presiding) in NYC.">
@@ -17,23 +18,177 @@
   <meta property="og:image:alt" content="A picture of ya boy, Neil Daftary">
   <meta property="og:locale" content="en_US">
   <meta property="article:author" content="Neil Daftary">
-  <meta property="og:url" content="https://neildaftary.com/" />
+  <meta property="og:url" content="https://neildaftary.com/"/>
 
-
+  <!-- Twitter stuffs -->
   <meta name="twitter:card" content="Neil Daftary">
   <meta name="twitter:creator" content="@neilzo">
   <meta name="twitter:url" content="https://neildaftary.com">
   <meta name="twitter:title" content="Neil Daftary">
-
   <meta name="twitter:description" content="Neil Daftary | Software engineer residing (and presiding) in NYC.">
 
-  <link rel="stylesheet" href="css/main.css">
-  <script src="https://kit.fontawesome.com/1e9edca376.js" rel="preconnect preload" crossorigin="anonymous"></script>
+  <!-- Preload custom font  -->
+  <link rel="preload" href="/fonts/BebasNeueRegular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA9/r3AAwllgAeHx4AAwICAPz//QASUZQAVLhtACRUMABtcG4A4ODgAD9APwA9cEkAOGDPAAAAAAAAAAAAAAAAAAAAAAAAALNEREkAAAA5s0RESbMAADmzRERJswAEOTNEREmzQAQ5M0RES7NABDtFpaVUQ0AEul3WxyFUQASlbWyMIlpABEXW3HIipEAANK1ociVDAAALRVFaFLAAAAALNERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA8A8AAMADAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAHAAD4HwAA//8AAP//AAD//wAA" rel="icon" type="image/x-icon" />
+  <!-- Styles -->
+  <style>
+    @font-face {
+      font-family: 'Bebas Neue';
+      src: local('Bebas Neue'), url(/fonts/BebasNeueRegular.woff2);
+      font-display: swap;
+    }
 
+    :root {
+      --color-white: #fcfcfc;
+      --primary-font-family: 'Bebas Neue', Helvetica, sans-serif;
+      --color-black: #222;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      height: 100%;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      height: 100%;
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      font-family: var(--primary-font-family);
+      letter-spacing: 5px;
+      font-size: 6rem;
+      margin: 0;
+    }
+
+    a,
+    a:visited,
+    a:active,
+    a:focus {
+      color: var(--color-black);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover,
+    i:hover {
+      text-decoration: none;
+      color: red;
+    }
+
+    ul {
+      list-style: none;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    .wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+    }
+
+    .social {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .link__icon {
+      padding: 5px;
+      margin: 0 0.5rem;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 400px) {
+      .wrap {
+        padding: 0 0.5rem;
+      }
+      h1 {
+        letter-spacing: 0;
+      }
+      .link__icon {
+        padding: 0;
+        margin: 0 0.625rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 9rem;
+      }
+      .link__icon {
+        font-size: 1rem;
+        margin: 0 0.75rem;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .link__icon {
+        margin: 0 1rem;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      h1 {
+        font-size: 12rem;
+      }
+      .link__icon {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .container a {
+        padding: .8em;
+      }
+    }
+
+    /* DARK THEME SUPPORT, BOOYAH */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-black);
+        color: var(--color-white);
+      }
+      a,
+      a:visited,
+      a:active,
+      a:focus {
+        color: var(--color-white);
+      }
+    }
+  </style>
+
+  <!-- Font Awesome Icons  -->
+  <link rel="dns-prefetch" href="https://kit.fontawesome.com">
+  <script src="https://kit.fontawesome.com/1e9edca376.js" crossorigin="anonymous" async defer></script>
+
+  <!-- Favicon  -->
+  <link
+    href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA9/r3AAwllgAeHx4AAwICAPz//QASUZQAVLhtACRUMABtcG4A4ODgAD9APwA9cEkAOGDPAAAAAAAAAAAAAAAAAAAAAAAAALNEREkAAAA5s0RESbMAADmzRERJswAEOTNEREmzQAQ5M0RES7NABDtFpaVUQ0AEul3WxyFUQASlbWyMIlpABEXW3HIipEAANK1ociVDAAALRVFaFLAAAAALNERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA8A8AAMADAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAHAAD4HwAA//8AAP//AAD//wAA"
+    rel="icon" type="image/x-icon"/>
+
+  <!-- Linked Data for rich search results -->
   <script type="application/ld+json">
-     {
+    {
       "@context": "https://schema.org",
       "@type": "Person",
       "url": "https://neildaftary.com",
@@ -45,9 +200,9 @@
       "worksFor": [
         {
           "@type": "Organization",
-          "name": "Zola",
+          "name": "Codecademy",
           "sameAs": [
-            "https://www.zola.com"
+            "https://www.codecademy.com"
           ]
         }
       ],
@@ -78,76 +233,76 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <section class="main">
-      <div class="name">
-        <h1>Neil Daftary</h1>
-      </div>
-      <ul class="social">
-        <li>
-          <a href="https://github.com/neilzo" data-event="GitHub" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="GitHub" class="fab fa-github-alt fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/neilzo" data-event="Twitter" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="Twitter" class="fab fa-twitter fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://codepen.io/neilzo" data-event="CodePen" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="CodePen" class="fab fa-codepen fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/neildaftary" data-event="LinkedIn" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="LinkedIn" class="fab fa-linkedin-in fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://instagram.com/braveliltoasterr" data-event="Instagram" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="Instagram" class="fab fa-instagram fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://unsplash.com/@neilzo" data-event="Unsplash" class="link__icon" target="_blank" rel="noopener">
-            <i data-event="Unsplash" class="fab fa-unsplash fa-2x"></i>
-          </a>
-        </li>
-      </ul>
-    </section>
-  </div>
+<div class="wrap">
+  <section class="main">
+    <div class="name">
+      <h1>Neil Daftary</h1>
+    </div>
+    <ul class="social">
+      <li>
+        <a href="https://github.com/neilzo" data-event="GitHub" class="link__icon" target="_blank"
+           rel="noopener" aria-label="View Neil Daftary's GitHub" title="Github">
+          <i data-event="GitHub" class="fab fa-github-alt fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://linkedin.com/in/neildaftary" data-event="LinkedIn" class="link__icon" target="_blank"
+           rel="noopener" aria-label="View Neil Daftary's LinkedIn" title="LinkedIn">
+          <i data-event="LinkedIn" class="fab fa-linkedin-in fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/neilzo" data-event="Twitter" class="link__icon" target="_blank"
+           rel="noopener" aria-label="View Neil Daftary's Twitter" title="Twitter">
+          <i data-event="Twitter" class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://codepen.io/neilzo" data-event="CodePen" class="link__icon" target="_blank"
+           rel="noopener" aria-label="View Neil Daftary's Codepen profile" title="Codepen">
+          <i data-event="CodePen" class="fab fa-codepen fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://unsplash.com/@neilzo" data-event="Unsplash" class="link__icon" target="_blank"
+           rel="noopener" aria-label="View Neil Daftary's Unsplash portfolio" title="Unsplash">
+          <i data-event="Unsplash" class="fab fa-unsplash fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
 
-  <script>
-    (function(b, o, i, l, e, r) {
-      b.GoogleAnalyticsObject = l;
-      b[l] || (b[l] =
-        function() {
-          (b[l].q = b[l].q || []).push(arguments)
-        });
-      b[l].l = +new Date;
-      e = o.createElement(i);
-      r = o.getElementsByTagName(i)[0];
-      e.src = '//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-40533751-2', 'auto');
-    ga('send', 'pageview');
+<script>
+  (function (b, o, i, l, e, r) {
+    b.GoogleAnalyticsObject = l;
+    b[l] || (b[l] =
+      function () {
+        (b[l].q = b[l].q || []).push(arguments)
+      });
+    b[l].l = +new Date;
+    e = o.createElement(i);
+    r = o.getElementsByTagName(i)[0];
+    e.src = '//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e, r)
+  }(window, document, 'script', 'ga'));
+  ga('create', 'UA-40533751-2', 'auto');
+  ga('send', 'pageview');
 
-    function handleClick(e) {
-      var eType = e.target.dataset.event;
+  function handleClick(e) {
+    let eType = e.target.dataset.event;
 
-      try {
-        ga('send', 'event', 'Clicks Out', 'click', eType)
-      } catch (e) {
-        //noop
-      }
+    try {
+      ga('send', 'event', 'Clicks Out', 'click', eType)
+    } catch (e) {
+      //noop
     }
+  }
 
-    for (var i = 0; i < document.getElementsByClassName('link__icon').length; i++) {
-      document.getElementsByClassName('link__icon')[i].addEventListener('click', handleClick);
-    };
-  </script>
+  for (let i = 0; i < document.getElementsByClassName('link__icon').length; i++) {
+    document.getElementsByClassName('link__icon')[i].addEventListener('click', handleClick);
+  }
+</script>
 </body>
 
 </html>
