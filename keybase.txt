@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/neilzo
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://neildaftary.com
+  * I am neilzo (https://keybase.io/neilzo) on keybase.
+  * I have a public key ASBGxf10DBpCQhGl02TZi-oFVEdy0OXygG0vOHcYTXg5vQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101ec21b7e25d2e7ad2c7fdcb766bdf0118b9364feb4e14cfb0207bc03d6610aaf70a",
+      "host": "keybase.io",
+      "kid": "012046c5fd740c1a424211a5d364d98bea05544772d0e5f2806d2f3877184d7839bd0a",
+      "uid": "8c4a0d50ef7f4f25afe3880365cfd419",
+      "username": "neilzo"
+    },
+    "merkle_root": {
+      "ctime": 1559008732,
+      "hash": "2a5cbe028af36124721c17a1e928819f9563fe2e2db76af29cc18baa0f938d022c897f22c1a0317beac19bceddb59a877ccdbb6f74fb8fb9409339b91c33956c",
+      "hash_meta": "514a824d1a3a9d1de1dda978b1121b139858cf374c48ea1368b1e91f839c2f23",
+      "seqno": 5458432
+    },
+    "service": {
+      "entropy": "90PzX2mKpCC302KpuH9dPCPX",
+      "hostname": "neildaftary.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.0.0"
+  },
+  "ctime": 1559008747,
+  "expire_in": 504576000,
+  "prev": "b8fb1b35202e73a40799eaf8922a4053074a333ab75ee246e9ec3354f325f157",
+  "seqno": 42,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgRsX9dAwaQkIRpdNk2YvqBVRHctDl8oBtLzh3GE14Ob0Kp3BheWxvYWTESpcCKsQguPsbNSAuc6QHmer4kipAUwdKMzq3XuJG6ewzVPMl8VfEICyvMXAnWvoGX5kbY2+YMXboMFSbaYqW7i0z5bCbSRvCAgHCo3NpZ8RAXAmVa9nt5xVQV1mtvj5SRF1ZnmJGJ8RXtaCoCTtpk8+SmyGka+2MoUDDB5/OOXcwX4nK5bhgW0t82P/rpeXmDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIDW4EkJMuU6fi0PU7IvoEbP3NxCvARvIAg1ommXOUDAoo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/neilzo
+
+==================================================================
