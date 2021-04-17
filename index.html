@@ -95,7 +95,18 @@
     }
 
     li {
-      display: inline-block;
+      display: flex;
+      align-self: stretch;
+      justify-content: center;
+      align-content: center;
+    }
+
+    .cell-ig {
+      grid-column-start: 2;
+    }
+
+    .cell-unsplash {
+      grid-column-start: 2;
     }
 
     .wrap {
@@ -108,23 +119,30 @@
 
     .main {
       margin-bottom: 1rem;
+      max-width: 100vw;
     }
 
     .social {
-      text-align: center;
-      min-height: 2.625rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      min-height: 3.625rem;
+      margin: 0 2rem;
+      max-width: 100%;
     }
 
     .link__icon {
-      padding: 0.313rem;
-      margin: 0 0.5rem;
+      margin: 0.5rem;
       font-size: 1rem;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .icon-wrap {
       color: currentColor;
       pointer-events: none;
+      width: 2rem;
+      height: 2rem;
     }
 
     .icon {
@@ -136,7 +154,12 @@
       fill: currentColor;
     }
 
-    @media (max-width: 400px) {
+    .link__icon-apple {
+      position: relative;
+      top: -2px;
+    }
+
+    @media (max-width: 479px) {
       .wrap {
         padding: 0 0.5rem;
       }
@@ -144,12 +167,19 @@
       h1 {
         letter-spacing: 0.188rem;
       }
+    }
 
-      .link__icon {
-        padding: 0;
-        margin: 0 0.625rem;
+    @media (min-width: 480px) {
+      .social {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: none;
+      }
+      .cell-unsplash,
+      .cell-ig {
+        grid-column-start: auto;
       }
     }
+
 
     @media (min-width: 768px) {
       h1 {
@@ -158,13 +188,6 @@
 
       .link__icon {
         font-size: 1rem;
-        margin: 0 0.75rem;
-      }
-    }
-
-    @media (min-width: 1440px) {
-      .link__icon {
-        margin: 0 1rem;
       }
     }
 
@@ -183,14 +206,10 @@
         padding: 0;
       }
 
-      .social a {
+      .link__icon {
         padding: 0;
         height: 2.625rem;
         width: 2.625rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0.5rem;
       }
     }
 
@@ -211,9 +230,7 @@
   </style>
 
   <!-- Favicon  -->
-  <link
-    href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA9/r3AAwllgAeHx4AAwICAPz//QASUZQAVLhtACRUMABtcG4A4ODgAD9APwA9cEkAOGDPAAAAAAAAAAAAAAAAAAAAAAAAALNEREkAAAA5s0RESbMAADmzRERJswAEOTNEREmzQAQ5M0RES7NABDtFpaVUQ0AEul3WxyFUQASlbWyMIlpABEXW3HIipEAANK1ociVDAAALRVFaFLAAAAALNERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA8A8AAMADAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAHAAD4HwAA//8AAP//AAD//wAA"
-    rel="icon"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
 
   <!-- Linked Data for rich search results -->
   <script type="application/ld+json">
@@ -296,6 +313,10 @@
         <title>Unsplash</title>
         <path d="M10 9v-9h12v9h-12zM22 14h10v18h-32v-18h10v9h12v-9z"></path>
       </symbol>
+      <symbol id="icon-apple" viewBox="0 0 24 24">
+        <title>Apple</title>
+        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+      </symbol>
     </defs>
   </svg>
 
@@ -306,7 +327,7 @@
     <ul class="social">
       <li>
         <a href="https://github.com/neilzo" data-event="GitHub" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's GitHub" title="Github">
+           rel="noopener" title="Github profile">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-github"><use xlink:href="#icon-github"></use></svg>
           </span>
@@ -314,7 +335,7 @@
       </li>
       <li>
         <a href="https://linkedin.com/in/neildaftary" data-event="LinkedIn" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's LinkedIn" title="LinkedIn">
+           rel="noopener" title="LinkedIn">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-linkedin"><use xlink:href="#icon-linkedin"></use></svg>
           </span>
@@ -322,31 +343,39 @@
       </li>
       <li>
         <a href="https://twitter.com/neilzo" data-event="Twitter" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's Twitter" title="Twitter">
+           rel="noopener" title="Twitter">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
           </span>
         </a>
       </li>
-      <li>
+      <li class="cell-codepen">
         <a href="https://codepen.io/neilzo" data-event="CodePen" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's Codepen profile" title="Codepen">
+           rel="noopener" title="Codepen profile">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-codepen"><use xlink:href="#icon-codepen"></use></svg>
           </span>
         </a>
       </li>
-      <li>
+      <li class="cell-unsplash">
         <a href="https://unsplash.com/@neilzo" data-event="Unsplash" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's Unsplash portfolio" title="Unsplash">
+           rel="noopener" title="Unsplash photography portfolio">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-unsplash"><use xlink:href="#icon-unsplash"></use></svg>
           </span>
         </a>
       </li>
-      <li>
+      <li class="cell-apple">
+        <a href="https://apps.apple.com/us/app/id1499273647" data-event="iOS App" class="link__icon link__icon-apple" target="_blank"
+           rel="noopener" title="My iOS sticker app">
+          <span class="icon-wrap" aria-hidden="true">
+            <svg class="icon icon-apple"><use xlink:href="#icon-apple"></use></svg>
+          </span>
+        </a>
+      </li>
+      <li class="cell-ig">
         <a href="https://instagram.com/braveliltoasterr" data-event="Instagram" class="link__icon" target="_blank"
-           rel="noopener" aria-label="View Neil Daftary's Instagram profile" title="Instagram">
+           rel="noopener" title="Instagram">
           <span class="icon-wrap" aria-hidden="true">
             <svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
           </span>
