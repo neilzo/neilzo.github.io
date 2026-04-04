@@ -1,0 +1,90 @@
+---
+interface Props {
+  year?: string;
+  title: string;
+  creator?: string;
+  description?: string;
+  url?: string;
+}
+const { year, title, creator, description, url } = Astro.props;
+---
+
+<li class="fav-entry">
+  <div class="fav-entry__header">
+    {year && <span class="fav-entry__year">{year}</span>}
+    <div class="fav-entry__title-row">
+      {url
+        ? <a href={url} class="fav-entry__title" target="_blank" rel="noopener noreferrer">{title}</a>
+        : <span class="fav-entry__title">{title}</span>
+      }
+      {creator && <span class="fav-entry__creator">{creator}</span>}
+    </div>
+  </div>
+  {description && <p class="fav-entry__desc">{description}</p>}
+</li>
+
+<style>
+  .fav-entry {
+    list-style: none;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(194, 200, 194, 0.25);
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 0 1.25rem;
+    align-items: start;
+  }
+
+  .fav-entry__header {
+    display: contents;
+  }
+
+  .fav-entry__year {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--color-outline);
+    text-transform: uppercase;
+    padding-top: 0.25rem;
+  }
+
+  .fav-entry__title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .fav-entry__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  a.fav-entry__title:hover {
+    color: var(--color-secondary);
+  }
+
+  .fav-entry__creator {
+    font-family: var(--font-label);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    white-space: nowrap;
+  }
+
+  .fav-entry__desc {
+    grid-column: 2;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.375rem 0 0;
+  }
+</style>

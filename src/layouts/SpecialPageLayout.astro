@@ -1,0 +1,113 @@
+---
+import SiteLayout from './SiteLayout.astro';
+import { formatDate } from '../utils/formatDate';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  sectionLabel?: string;
+  updatedDate?: Date;
+  activeNav?: string;
+}
+const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
+---
+
+<SiteLayout {title} activeNav={activeNav ?? title}>
+  <div class="special-page">
+    <header class="special-header">
+      {sectionLabel && (
+        <span class="special-header__label">{sectionLabel}</span>
+      )}
+      <div class="special-header__title-row">
+        <div class="special-header__accent"></div>
+        <h1 class="special-header__title">{title}</h1>
+      </div>
+      {subtitle && (
+        <p class="special-header__subtitle">{subtitle}</p>
+      )}
+      {updatedDate && (
+        <p class="special-header__updated">
+          Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
+        </p>
+      )}
+      <div class="special-header__rule"></div>
+    </header>
+
+    <div class="special-body">
+      <slot />
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .special-page {
+    padding-top: 3rem;
+    max-width: 52rem;
+  }
+
+  .special-header {
+    margin-bottom: 3rem;
+  }
+
+  .special-header__label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .special-header__title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .special-header__accent {
+    width: 4px;
+    background: var(--color-secondary);
+    min-height: 3rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .special-header__title {
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .special-header__subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 0.75rem;
+    padding-left: calc(4px + 1.25rem);
+  }
+
+  .special-header__updated {
+    font-family: var(--font-label);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    margin: 0 0 1rem;
+    padding-left: calc(4px + 1.25rem);
+  }
+
+  .special-header__rule {
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.1;
+    margin-top: 1.5rem;
+  }
+</style>

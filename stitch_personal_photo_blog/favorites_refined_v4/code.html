@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARCHIVE — Favorites</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "outline": "#727973",
+                        "on-surface": "#1b1c19",
+                        "primary": "#173124",
+                        "secondary": "#944925",
+                        "surface-container": "#f0eee9",
+                        "secondary-fixed": "#ffdbcd",
+                        "tertiary-container": "#6d3000",
+                        "primary-container": "#2d4739",
+                        "background": "#fbf9f4",
+                        "tertiary": "#4b1f00",
+                        "on-tertiary-container": "#f3985f",
+                        "inverse-surface": "#30312e",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-container-high": "#eae8e3",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c19",
+                        "secondary-fixed-dim": "#ffb596",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#062014",
+                        "tertiary-fixed-dim": "#ffb68c",
+                        "outline-variant": "#c2c8c2",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#753401",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f1ec",
+                        "inverse-primary": "#b0cdbb",
+                        "surface-container-low": "#f5f3ee",
+                        "surface-tint": "#496455",
+                        "on-tertiary-fixed": "#321200",
+                        "primary-fixed-dim": "#b0cdbb",
+                        "surface-bright": "#fbf9f4",
+                        "secondary-container": "#fe9e72",
+                        "on-secondary-fixed-variant": "#76320f",
+                        "on-primary-container": "#98b5a3",
+                        "tertiary-fixed": "#ffdbc9",
+                        "on-secondary-container": "#773310",
+                        "surface-dim": "#dbdad5",
+                        "surface": "#fbf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424844",
+                        "primary-fixed": "#ccead6",
+                        "on-primary-fixed-variant": "#324c3e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Newsreader"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .architectural-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(23, 49, 36, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(23, 49, 36, 0.03) 1px, transparent 1px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-secondary selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#fbf9f4] border-b border-[#173124]/10">
+<nav class="flex justify-between items-center w-full px-12 py-6 max-w-screen-2xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#173124] uppercase font-headline">ARCHIVE</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] hover:text-[#944925] transition-colors duration-300 pb-1" href="#">Home</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] hover:text-[#944925] transition-colors duration-300 pb-1" href="#">About</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#944925] border-b border-[#944925] pb-1" href="#">Favorites</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] hover:text-[#944925] transition-colors duration-300 pb-1" href="#">Setup</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#173124]">search</span>
+</div>
+</nav>
+</header>
+<div class="flex pt-20">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen sticky top-20 py-12 px-6 bg-[#eae8e3] border-r border-[#173124]/10 w-64">
+<div class="mb-12">
+<h3 class="font-['Manrope'] font-black text-[#173124] text-xs tracking-widest uppercase mb-1">CATEGORIES</h3>
+<p class="font-['Newsreader'] italic text-sm text-stone-500">Filtered Archive</p>
+</div>
+<nav class="space-y-6">
+<a class="flex items-center gap-3 text-stone-500 hover:bg-[#fbf9f4] transition-all pl-5 py-2" href="#">
+<span class="material-symbols-outlined text-lg">architecture</span>
+<span class="font-['Newsreader'] italic text-lg">Architecture</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:bg-[#fbf9f4] transition-all pl-5 py-2" href="#">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+<span class="font-['Newsreader'] italic text-lg">Philosophy</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:bg-[#fbf9f4] transition-all pl-5 py-2" href="#">
+<span class="material-symbols-outlined text-lg">grid_view</span>
+<span class="font-['Newsreader'] italic text-lg">Design Systems</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:bg-[#fbf9f4] transition-all pl-5 py-2" href="#">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+<span class="font-['Newsreader'] italic text-lg">Photography</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:bg-[#fbf9f4] transition-all pl-5 py-2" href="#">
+<span class="material-symbols-outlined text-lg">edit_note</span>
+<span class="font-['Newsreader'] italic text-lg">Drafts</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 architectural-grid min-h-screen p-8 md:p-24 relative">
+<div class="max-w-4xl mx-auto">
+<header class="mb-32 border-l-4 border-secondary pl-8">
+<span class="font-headline text-[11px] uppercase tracking-[0.2em] text-secondary font-bold">The Curated Record</span>
+<h1 class="font-headline text-5xl md:text-7xl font-light text-primary tracking-tighter mt-4 leading-tight">Favorites</h1>
+<p class="font-body text-xl text-outline mt-6 max-w-xl italic leading-relaxed">
+                        A strictly edited list of works that have fundamentally shifted my perspective on aesthetic and mechanical utility.
+                    </p>
+</header>
+<!-- Cinema Section -->
+<section class="mb-32">
+<div class="flex items-baseline gap-4 mb-12 border-b border-outline-variant pb-4">
+<span class="font-headline text-xs font-bold uppercase tracking-widest text-primary">01.</span>
+<h2 class="font-headline text-2xl uppercase tracking-widest text-primary">Cinema</h2>
+<span class="font-body italic text-sm text-outline ml-auto">Movies &amp; TV</span>
+</div>
+<div class="space-y-16">
+<!-- Cinema Entry 1 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">2001</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">Stalker</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">Andrei Tarkovsky</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    A metaphysical journey through a forbidden landscape. Its architectural pacing and deliberate stillness redefine the boundaries of visual narrative.
+                                </p>
+</div>
+</div>
+<!-- Cinema Entry 2 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">1982</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">Blade Runner</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">Ridley Scott</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    The definitive study in neon-noir world-building. A masterclass in atmosphere, where the environment serves as a primary emotional protagonist.
+                                </p>
+</div>
+</div>
+<!-- Cinema Entry 3 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">2019</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">Succession</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">HBO</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    A brutal exploration of power and familial collapse, choreographed with the precision of a classical tragedy through hyper-modern dialogue.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Games Section -->
+<section class="mb-32">
+<div class="flex items-baseline gap-4 mb-12 border-b border-outline-variant pb-4">
+<span class="font-headline text-xs font-bold uppercase tracking-widest text-primary">02.</span>
+<h2 class="font-headline text-2xl uppercase tracking-widest text-primary">Games</h2>
+<span class="font-body italic text-sm text-outline ml-auto">Interactive Logic</span>
+</div>
+<div class="space-y-16">
+<!-- Games Entry 1 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">2019</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">Disco Elysium</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">ZA/UM</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    A revolutionary approach to narrative choice and internal character dialogue. An oil-painted fever dream of political philosophy and human frailty.
+                                </p>
+</div>
+</div>
+<!-- Games Entry 2 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">2011</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">Dark Souls</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">FromSoftware</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    Interconnected level design that functions with the logic of a gothic cathedral. A landmark in atmospheric storytelling through environment.
+                                </p>
+</div>
+</div>
+<!-- Games Entry 3 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative group">
+<div class="md:col-span-1">
+<span class="font-headline text-[10px] text-outline font-bold">2016</span>
+</div>
+<div class="md:col-span-11">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-headline text-xl text-primary font-bold uppercase tracking-tight group-hover:text-secondary transition-colors">The Witness</h3>
+<span class="font-headline text-[10px] text-outline uppercase tracking-widest">Thekla, Inc.</span>
+</div>
+<p class="font-body text-lg text-on-surface max-w-2xl leading-relaxed">
+                                    Pure geometric epiphany. A dialogue between the player and the island's landscape, stripped of all traditional UI distractions.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Grid Motif Footer Decoration -->
+<div class="grid grid-cols-2 md:grid-cols-4 border-t border-outline-variant pt-8">
+<div class="border-r border-outline-variant/30 pr-4">
+<span class="font-headline text-[9px] uppercase tracking-widest text-outline block mb-1">Last Update</span>
+<span class="font-headline text-xs font-bold text-primary">OCT 2023</span>
+</div>
+<div class="border-r border-outline-variant/30 px-4">
+<span class="font-headline text-[9px] uppercase tracking-widest text-outline block mb-1">Status</span>
+<span class="font-headline text-xs font-bold text-primary">ARCHIVED</span>
+</div>
+<div class="border-r border-outline-variant/30 px-4">
+<span class="font-headline text-[9px] uppercase tracking-widest text-outline block mb-1">Items</span>
+<span class="font-headline text-xs font-bold text-primary">06 LISTED</span>
+</div>
+<div class="pl-4">
+<span class="font-headline text-[9px] uppercase tracking-widest text-outline block mb-1">Location</span>
+<span class="font-headline text-xs font-bold text-primary">LONDON, UK</span>
+</div>
+</div>
+</div>
+<!-- Asymmetrical Drafting Marks -->
+<div class="absolute top-24 right-12 w-24 h-[1px] bg-secondary opacity-30 hidden lg:block"></div>
+<div class="absolute top-20 right-12 w-[1px] h-24 bg-secondary opacity-30 hidden lg:block"></div>
+<div class="absolute bottom-24 left-12 w-24 h-[1px] bg-secondary opacity-30 hidden lg:block"></div>
+<div class="absolute bottom-20 left-12 w-[1px] h-24 bg-secondary opacity-30 hidden lg:block"></div>
+</main>
+</div>
+</body></html>

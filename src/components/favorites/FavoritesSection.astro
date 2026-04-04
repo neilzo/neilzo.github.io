@@ -1,0 +1,77 @@
+---
+interface Props {
+  index: string;
+  title: string;
+  subtitle?: string;
+}
+const { index, title, subtitle } = Astro.props;
+---
+
+<section class="fav-section">
+  <header class="fav-section__header">
+    <div class="fav-section__title-row">
+      <span class="fav-section__index">{index}.</span>
+      <h2 class="fav-section__title">{title}</h2>
+      {subtitle && <span class="fav-section__subtitle">{subtitle}</span>}
+    </div>
+    <div class="fav-section__rule"></div>
+  </header>
+  <ul class="fav-section__list">
+    <slot />
+  </ul>
+</section>
+
+<style>
+  .fav-section {
+    margin-bottom: 3.5rem;
+  }
+
+  .fav-section__header {
+    margin-bottom: 0.25rem;
+  }
+
+  .fav-section__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .fav-section__index {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+  }
+
+  .fav-section__title {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .fav-section__subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--color-outline);
+    margin-left: auto;
+  }
+
+  .fav-section__rule {
+    height: 1px;
+    background: var(--color-outline-variant);
+    opacity: 0.5;
+  }
+
+  .fav-section__list {
+    margin: 0;
+    padding: 0;
+  }
+</style>

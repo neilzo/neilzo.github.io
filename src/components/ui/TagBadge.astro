@@ -1,0 +1,37 @@
+---
+import { tagToSlug } from '../../utils/getPostsByTag';
+
+interface Props {
+  tag: string;
+  active?: boolean;
+}
+const { tag, active = false } = Astro.props;
+const slug = tagToSlug(tag);
+---
+
+<a href={`/tags/${slug}`} class={`tag-badge${active ? ' tag-badge--active' : ''}`}>
+  {tag}
+</a>
+
+<style>
+  .tag-badge {
+    display: inline-block;
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-outline-variant);
+    padding: 0.2rem 0.5rem;
+    color: var(--color-on-surface-variant);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .tag-badge:hover,
+  .tag-badge--active {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+</style>

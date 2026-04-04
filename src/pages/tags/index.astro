@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { ALL_TAGS, tagToSlug } from '../../utils/getPostsByTag';
+---
+
+<SiteLayout title="Tags">
+  <div style="padding-top: 4rem;">
+    <h1 style="font-family: var(--font-headline); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-outline); margin-bottom: 2rem;">All Tags</h1>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+      {ALL_TAGS.map(tag => (
+        <a href={`/tags/${tagToSlug(tag)}`} style="font-family: var(--font-label); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--color-outline-variant); padding: 0.375rem 0.75rem; color: var(--color-primary); text-decoration: none;">
+          {tag}
+        </a>
+      ))}
+    </div>
+  </div>
+</SiteLayout>

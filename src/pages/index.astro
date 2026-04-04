@@ -1,0 +1,78 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PostCard from '../components/posts/PostCard.astro';
+import PostCardPhoto from '../components/posts/PostCardPhoto.astro';
+import Pagination from '../components/ui/Pagination.astro';
+import { getAllPosts } from '../utils/getAllPosts';
+
+const PAGE_SIZE = 8;
+const allPosts = await getAllPosts();
+const pagePosts = allPosts.slice(0, PAGE_SIZE);
+const lastPage = Math.ceil(allPosts.length / PAGE_SIZE);
+---
+
+<SiteLayout title="The Ordered Archive" activeNav="Home">
+  <div class="feed-header">
+    <div class="feed-header__eyebrow">
+      <span class="feed-issue">The Permanent Record</span>
+      <span class="feed-count">{allPosts.length} entries</span>
+    </div>
+    <div class="feed-header__rule"></div>
+  </div>
+
+  <div class="feed">
+    {pagePosts.map((post, i) => (
+      post.data.template === 'photos'
+        ? <PostCardPhoto {post} entryIndex={i} />
+        : <PostCard {post} entryIndex={i} />
+    ))}
+  </div>
+
+  <Pagination
+    currentPage={1}
+    {lastPage}
+    nextUrl={lastPage > 1 ? '/page/2' : undefined}
+    baseUrl="/page"
+  />
+</SiteLayout>
+
+<style>
+  .feed-header {
+    padding-top: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .feed-header__eyebrow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .feed-issue {
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .feed-count {
+    font-family: var(--font-label);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .feed-header__rule {
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.15;
+  }
+
+  .feed {
+    margin-top: 0;
+  }
+</style>

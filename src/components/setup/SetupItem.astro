@@ -1,0 +1,65 @@
+---
+interface Props {
+  name: string;
+  url?: string;
+  description?: string;
+  acquired?: string;
+}
+const { name, url, description, acquired } = Astro.props;
+---
+
+<li class="setup-item">
+  <div class="setup-item__header">
+    {url
+      ? <a href={url} class="setup-item__name" target="_blank" rel="noopener noreferrer">{name}</a>
+      : <span class="setup-item__name">{name}</span>
+    }
+    {acquired && <span class="setup-item__acquired">{acquired}</span>}
+  </div>
+  {description && <p class="setup-item__desc">{description}</p>}
+</li>
+
+<style>
+  .setup-item {
+    list-style: none;
+    padding: 1.125rem 0;
+    border-bottom: 1px solid rgba(194, 200, 194, 0.25);
+  }
+
+  .setup-item__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .setup-item__name {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  a.setup-item__name:hover {
+    color: var(--color-secondary);
+  }
+
+  .setup-item__acquired {
+    font-family: var(--font-label);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    white-space: nowrap;
+  }
+
+  .setup-item__desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.375rem 0 0;
+  }
+</style>

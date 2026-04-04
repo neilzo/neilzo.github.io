@@ -1,0 +1,94 @@
+---
+import SpecialPageLayout from '../layouts/SpecialPageLayout.astro';
+import SetupCategory from '../components/setup/SetupCategory.astro';
+import SetupItem from '../components/setup/SetupItem.astro';
+---
+
+<SpecialPageLayout
+  title="Setup"
+  subtitle="The tools and gear I use to do my work."
+  sectionLabel="Index 004"
+  activeNav="Setup"
+>
+  <SetupCategory label="Computer" icon="computer">
+    <SetupItem
+      name="Mac Studio M2 Ultra"
+      description="Primary workstation. Handles everything I throw at it. The M2 Ultra is overkill for most of what I do, which is exactly the point."
+      acquired="2023"
+    />
+    <SetupItem
+      name="Apple Studio Display"
+      description="27-inch, 5K. The color accuracy is genuinely excellent for photo work."
+      acquired="2022"
+    />
+    <SetupItem
+      name="Keychron Q1 Pro"
+      description="QMK wireless mechanical keyboard. Cherry MX Brown switches. The build quality is exceptional for the price."
+      acquired="2023"
+    />
+    <SetupItem
+      name="Logitech MX Master 3S"
+      description="The best mouse I've used. The electromagnetic scroll wheel is the feature I didn't know I needed."
+      acquired="2022"
+    />
+  </SetupCategory>
+
+  <SetupCategory label="Camera" icon="photo_camera">
+    <SetupItem
+      name="Leica SL2-S"
+      description="My main camera. The 24MP BSI sensor performs remarkably in low light. I use it for everything serious."
+      acquired="2021"
+    />
+    <SetupItem
+      name="Leica APO-Summicron-SL 50mm f/2"
+      description="The sharpest lens I've ever used. Clinical but not cold. The rendering is unlike anything from Japanese manufacturers."
+      acquired="2022"
+    />
+    <SetupItem
+      name="Leica Vario-Elmarit-SL 24–90mm f/2.8–4"
+      description="Travel zoom. The range covers almost everything. I reach for this when I don't want to think about focal length."
+      acquired="2021"
+    />
+    <SetupItem
+      name="iPhone 15 Pro"
+      description="The computational photography pipeline is genuinely impressive now. I use it for things the SL2-S would be absurd for."
+      acquired="2023"
+    />
+  </SetupCategory>
+
+  <SetupCategory label="Accessories & Tools" icon="construction">
+    <SetupItem
+      name="Ugmonk Gather"
+      description="Leather desk organizer. Keeps the desk from descending into entropy."
+      acquired="2022"
+    />
+    <SetupItem
+      name="Field Notes memo books"
+      description="For quick notes that shouldn't live in Obsidian yet. The graph paper edition specifically."
+    />
+    <SetupItem
+      name="Rode NT-USB Mini"
+      description="Compact USB condenser microphone. Good enough for calls and occasional recording without taking over the desk."
+      acquired="2022"
+    />
+  </SetupCategory>
+
+  <SetupCategory label="Software" icon="code">
+    <SetupItem
+      name="Obsidian"
+      description="Primary notes and writing environment. Local-first, Markdown, extensible. The correct choice for information I want to exist in ten years."
+    />
+    <SetupItem
+      name="Raycast"
+      description="Replaced Spotlight, Alfred, and several other utilities. The clipboard history and window management alone justify it."
+    />
+    <SetupItem
+      name="Capture One"
+      description="RAW processing. The Leica profiles are excellent. I've tried Lightroom Classic several times and always come back."
+    />
+    <SetupItem
+      name="VS Code"
+      description="Editor of record. I've tried Cursor and Zed. VS Code with good extensions remains the practical choice."
+    />
+  </SetupCategory>
+</SpecialPageLayout>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARCHIVE — Editorial Post</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "outline": "#727973",
+                        "on-surface": "#1b1c19",
+                        "primary": "#173124",
+                        "secondary": "#944925",
+                        "surface-container": "#f0eee9",
+                        "secondary-fixed": "#ffdbcd",
+                        "tertiary-container": "#6d3000",
+                        "primary-container": "#2d4739",
+                        "background": "#fbf9f4",
+                        "tertiary": "#4b1f00",
+                        "on-tertiary-container": "#f3985f",
+                        "inverse-surface": "#30312e",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-container-high": "#eae8e3",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c19",
+                        "secondary-fixed-dim": "#ffb596",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#062014",
+                        "tertiary-fixed-dim": "#ffb68c",
+                        "outline-variant": "#c2c8c2",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#753401",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f2f1ec",
+                        "inverse-primary": "#b0cdbb",
+                        "surface-container-low": "#f5f3ee",
+                        "surface-tint": "#496455",
+                        "on-tertiary-fixed": "#321200",
+                        "primary-fixed-dim": "#b0cdbb",
+                        "surface-bright": "#fbf9f4",
+                        "secondary-container": "#fe9e72",
+                        "on-secondary-fixed-variant": "#76320f",
+                        "on-primary-container": "#98b5a3",
+                        "tertiary-fixed": "#ffdbc9",
+                        "on-secondary-container": "#773310",
+                        "surface-dim": "#dbdad5",
+                        "surface": "#fbf9f4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424844",
+                        "primary-fixed": "#ccead6",
+                        "on-primary-fixed-variant": "#324c3e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Newsreader", "serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-image: 
+                linear-gradient(to right, rgba(23, 49, 36, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(23, 49, 36, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary selection:text-white">
+<div class="grain-overlay"></div>
+<!-- TopNavBar -->
+<nav class="bg-[#fbf9f4] dark:bg-stone-950 border-b border-[#173124]/10 dark:border-stone-800 sticky top-0 z-40 backdrop-blur-xl bg-opacity-90">
+<div class="flex justify-between items-center w-full px-6 md:px-12 py-6 max-w-screen-2xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#173124] dark:text-stone-50 font-headline">
+                ARCHIVE
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] dark:text-stone-400 pb-1 hover:text-[#944925] transition-colors duration-300" href="#">Home</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] dark:text-stone-400 pb-1 hover:text-[#944925] transition-colors duration-300" href="#">About</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] dark:text-stone-400 pb-1 hover:text-[#944925] transition-colors duration-300" href="#">Favorites</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[11px] text-[#173124] dark:text-stone-400 pb-1 hover:text-[#944925] transition-colors duration-300" href="#">Setup</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="search">search</span>
+<span class="material-symbols-outlined text-primary md:hidden" data-icon="menu">menu</span>
+</div>
+</div>
+</nav>
+<main class="max-w-4xl mx-auto px-6 md:px-12 pb-32 pt-16">
+<!-- Editorial Header Section -->
+<header class="mb-24">
+<div class="mb-8 flex gap-4 items-center">
+<span class="font-headline text-[11px] uppercase tracking-[0.2em] text-secondary font-bold">Category — Architecture</span>
+<div class="h-[1px] w-12 bg-secondary/30"></div>
+<span class="font-headline text-[11px] uppercase tracking-[0.2em] text-outline">Vol. 04 — Series 12</span>
+</div>
+<h1 class="text-5xl md:text-8xl font-headline font-bold text-primary leading-[0.95] tracking-tighter mb-8">
+                The Silent Weight of<br/>Concrete Forms.
+            </h1>
+<div class="border-t border-outline-variant/30 pt-8">
+<p class="font-headline text-[10px] uppercase tracking-widest text-outline mb-1">Date Published</p>
+<p class="font-body text-lg text-primary">October 24, 2023</p>
+</div>
+</header>
+<!-- Lead Image: Monograph Frame -->
+<section class="mb-32 relative">
+<div class="bg-surface-container-low p-4 md:p-12 border border-outline-variant/30">
+<img alt="Brutalist concrete building" class="w-full h-auto object-cover grayscale brightness-95" data-alt="monochrome cinematic shot of a brutalist concrete building with sharp geometric shadows and high contrast morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUZK0RIADtgGFjEkdLhEIddtb8kXmkYWVBm1Ozly_kc1ONqsjtLxZzlJNtp4TPFyoDES4txxgm2WhJT6ZI8myZT7Ax1POiIJwa3sMJsT1OLFh37iyEipkVAf_iELVYrd-VtFEPlDQcTHzaQ1dwhXYS8gLHZdSrqnexhs9chzC6WXWtKBhpL1XZ7BEXpGsDtUKB5ynCHmw7q1sOfC0Nbnex0tsh0M-NmbRlBHAdF5Rb4ZaoC1ethModQk05xifqwAHiVWrfsRHwMYlc"/>
+</div>
+<div class="absolute -bottom-6 right-12 bg-primary text-on-primary px-6 py-4 font-headline text-[11px] uppercase tracking-widest">
+                Fig. 01 — Structural Symmetry
+            </div>
+</section>
+<!-- Body Content Block 1 -->
+<article class="space-y-12 mb-32">
+<div class="flex items-start gap-4 mb-12">
+<div class="w-1 h-8 bg-secondary shrink-0"></div>
+<p class="font-headline font-bold text-lg tracking-tight text-primary leading-tight">Exploring the intersection of raw material and human perception.</p>
+</div>
+<p class="font-body text-2xl md:text-3xl leading-relaxed text-on-surface">
+                Brutalism was never intended to be "ugly." It was an honest expression of material—a rejection of the bourgeois ornamentation that had masked the skeletal truths of architecture for centuries. When we look at a concrete monolith, we aren't looking at a wall; we are looking at a <span class="italic text-secondary">liquid stone</span> frozen in a moment of structural defiance.
+            </p>
+<p class="font-body text-xl leading-relaxed text-on-surface-variant">
+                The geometry of these spaces demands a specific type of presence. One cannot simply pass through a brutalist corridor; the weight of the overhead mass forces a psychological grounding. There is a permanence here that feels missing in the glass-and-steel ephemerality of our modern tech hubs. Concrete does not pretend. It ages, it stains, it records the passage of rain and smog, becoming a living document of its environment.
+            </p>
+</article>
+<!-- Single-column Image flow -->
+<section class="space-y-32 mb-32">
+<div class="space-y-4">
+<div class="aspect-[4/3] bg-surface-container-low border border-outline-variant p-4">
+<img alt="Concrete interior" class="w-full h-full object-cover grayscale" data-alt="interior view of a minimalist concrete living space with one large window casting a rectangular light beam on the floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBlAxxGs5ZI0rh26wyrS5CE0-XLseI0mK_P8g1A2hzhyrn4v1-lb7anYVQAtjEuSo6o2izy9G7M0Ewfk-rSYnQ6UuVz7VynGy23yUuFavBWU14dqqe1fn7GUTKUC_GWsZIGY6QK8F8VXJ5mCxvc-XKAaf__1-B8lfcZVh_CbeNWkgUl6XSdjQi0uhMa9--ObrJSgGjuLT4jxBY2S-e6MVQKzBxx0UmK1fSBn1y59hbMK79tCKY9E8Cd_dBecFenRPcSkdCFMIwe0mZ"/>
+</div>
+<div class="flex justify-between items-baseline py-2 border-b border-outline-variant/30">
+<span class="font-headline text-[10px] uppercase tracking-widest font-bold">Plate 02</span>
+<span class="font-body text-sm italic">The Light Well</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="aspect-[4/3] bg-surface-container-low border border-outline-variant p-4">
+<img alt="Minimalist object" class="w-full h-full object-cover" data-alt="single minimalist ceramic lamp on a raw wooden table against a grey concrete wall soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC66PSlSby3vCRahNwUfTjwxEvOkPwAXKGQmmuxSTr2tg5MyfdUr6b8OT3aeUoJ0HFDVtYl64-doTBA9ozC8sKwX7Nkrs1LKWUcU8HFPO8k03Hp6qbApqSAHwErALNhV6HTeBUThFUTigWSMt781taM11OGnGyujvhpEOkJQSftIDFl_5viodS4JDss1rMsW2dSxIlVCs5l5R3qx9SCR4SDmWX7aaC13uFsduJSIXcKCwyD9q1OUWhj5IweQ2DgCry24vAEdwXBQ_ZX"/>
+</div>
+<div class="flex justify-between items-baseline py-2 border-b border-outline-variant/30">
+<span class="font-headline text-[10px] uppercase tracking-widest font-bold">Plate 03</span>
+<span class="font-body text-sm italic">Object Permanence</span>
+</div>
+</div>
+</section>
+<!-- Technical Specs Footer -->
+<footer class="border-t border-primary/20 pt-16 mt-32">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="flex flex-col gap-2">
+<span class="font-headline font-bold text-[10px] uppercase tracking-widest text-primary">Archival Index</span>
+<span class="font-body text-sm text-on-surface-variant">REF_CODE: BRUT-2401-X</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-headline font-bold text-[10px] uppercase tracking-widest text-primary">Camera Equipment</span>
+<span class="font-body text-sm text-on-surface-variant">Leica M11 — 35mm Summilux</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-headline font-bold text-[10px] uppercase tracking-widest text-primary">Location Tag</span>
+<span class="font-body text-sm text-on-surface-variant">Barbican Estate, London</span>
+</div>
+<div class="flex justify-end items-start gap-4">
+<button class="bg-primary text-white px-8 py-3 font-headline text-[10px] uppercase tracking-widest hover:bg-primary-container transition-colors">
+                        Download PDF
+                    </button>
+<button class="border border-primary text-primary px-4 py-3 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

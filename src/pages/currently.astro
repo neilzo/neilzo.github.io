@@ -1,0 +1,164 @@
+---
+import SpecialPageLayout from '../layouts/SpecialPageLayout.astro';
+---
+
+<SpecialPageLayout
+  title="Currently"
+  subtitle="What I'm reading, watching, and playing right now."
+  sectionLabel="The Current State"
+  activeNav="Currently"
+>
+  <div class="currently-grid">
+    <section class="current-section">
+      <h2 class="current-section__title">
+        <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+        Reading
+      </h2>
+      <div class="current-items">
+        <div class="current-item">
+          <span class="current-item__title">The Death of Ivan Ilyich</span>
+          <span class="current-item__creator">Tolstoy</span>
+          <p class="current-item__note">Re-reading this. Short, devastating, perfect.</p>
+        </div>
+        <div class="current-item current-item--queued">
+          <span class="current-item__label">Up next</span>
+          <span class="current-item__title">A Pattern Language</span>
+          <span class="current-item__creator">Alexander et al.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="current-section">
+      <h2 class="current-section__title">
+        <span class="material-symbols-outlined" aria-hidden="true">movie</span>
+        Watching
+      </h2>
+      <div class="current-items">
+        <div class="current-item">
+          <span class="current-item__title">Shogun</span>
+          <span class="current-item__creator">FX</span>
+          <p class="current-item__note">Midway through. The production design is extraordinary.</p>
+        </div>
+        <div class="current-item">
+          <span class="current-item__title">Chungking Express</span>
+          <span class="current-item__creator">WKW · Rewatch</span>
+          <p class="current-item__note">Annual watch. The Faye Wong scenes still land.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="current-section">
+      <h2 class="current-section__title">
+        <span class="material-symbols-outlined" aria-hidden="true">sports_esports</span>
+        Playing
+      </h2>
+      <div class="current-items">
+        <div class="current-item">
+          <span class="current-item__title">Balatro</span>
+          <p class="current-item__note">The best card game design in a decade. The poker-roguelike combination shouldn't work this well.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="current-section">
+      <h2 class="current-section__title">
+        <span class="material-symbols-outlined" aria-hidden="true">headphones</span>
+        Listening
+      </h2>
+      <div class="current-items">
+        <div class="current-item">
+          <span class="current-item__title">Bright Magic</span>
+          <span class="current-item__creator">Fatima Al Qadiri</span>
+        </div>
+        <div class="current-item">
+          <span class="current-item__title">Cavalcade</span>
+          <span class="current-item__creator">black midi</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</SpecialPageLayout>
+
+<style>
+  .currently-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .currently-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .current-section__title {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(194, 200, 194, 0.35);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+  }
+
+  .current-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .current-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .current-item--queued {
+    opacity: 0.55;
+  }
+
+  .current-item__label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .current-item__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+  }
+
+  .current-item__creator {
+    font-family: var(--font-label);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .current-item__note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.25rem 0 0;
+  }
+</style>

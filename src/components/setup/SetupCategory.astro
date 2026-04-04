@@ -1,0 +1,67 @@
+---
+interface Props {
+  label: string;
+  icon?: string;
+}
+const { label, icon } = Astro.props;
+---
+
+<section class="setup-cat">
+  <header class="setup-cat__header">
+    {icon && (
+      <span class="material-symbols-outlined setup-cat__icon" aria-hidden="true">{icon}</span>
+    )}
+    <h2 class="setup-cat__title">{label}</h2>
+    <div class="setup-cat__rule"></div>
+  </header>
+  <ul class="setup-cat__list">
+    <slot />
+  </ul>
+</section>
+
+<style>
+  .setup-cat {
+    margin-bottom: 3rem;
+  }
+
+  .setup-cat__header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(194, 200, 194, 0.4);
+  }
+
+  .setup-cat__icon {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    font-size: 1rem;
+    color: var(--color-secondary);
+  }
+
+  .setup-cat__title {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .setup-cat__rule {
+    height: 1px;
+    display: none;
+  }
+
+  .setup-cat__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    font-size: 1rem;
+  }
+</style>
