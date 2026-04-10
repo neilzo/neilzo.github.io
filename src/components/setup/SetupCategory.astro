@@ -1,16 +1,12 @@
 ---
 interface Props {
   label: string;
-  icon?: string;
 }
-const { label, icon } = Astro.props;
+const { label } = Astro.props;
 ---
 
 <section class="setup-cat">
   <header class="setup-cat__header">
-    {icon && (
-      <span class="material-symbols-outlined setup-cat__icon" aria-hidden="true">{icon}</span>
-    )}
     <h2 class="setup-cat__title">{label}</h2>
     <div class="setup-cat__rule"></div>
   </header>

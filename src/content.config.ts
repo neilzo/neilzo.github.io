@@ -72,8 +72,17 @@ const about = defineCollection({
   }),
 });
 
+const setup = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+  }),
+});
+
 export const collections = {
   posts,
   'pages-special': pagesSpecial,
   about,
+  setup,
 };
