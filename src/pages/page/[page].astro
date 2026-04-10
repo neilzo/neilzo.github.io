@@ -2,13 +2,16 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostCard from '../../components/posts/PostCard.astro';
 import PostCardPhoto from '../../components/posts/PostCardPhoto.astro';
+import PostCardReview from '../../components/posts/PostCardReview.astro';
 import Pagination from '../../components/ui/Pagination.astro';
 import { getAllPosts } from '../../utils/getAllPosts';
+import { computeEntryNumbers } from '../../utils/computeEntryNumbers';
 
 export async function getStaticPaths() {
   const PAGE_SIZE = 8;
   const allPosts = await getAllPosts();
   const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
+  const entryNums = computeEntryNumbers(allPosts);
 
   return Array.from({ length: totalPages }, (_, i) => {
     const page = i + 1;
@@ -21,12 +24,13 @@ export async function getStaticPaths() {
         currentPage: page,
         lastPage: totalPages,
         totalPosts: allPosts.length,
+        entryNums,
       },
     };
   });
 }
 
-const { pagePosts, currentPage, lastPage, totalPosts } = Astro.props;
+const { pagePosts, currentPage, lastPage, totalPosts, entryNums } = Astro.props;
 ---
 
 <SiteLayout title={`Page ${currentPage} — The Ordered Archive`} activeNav="Home">
@@ -39,10 +43,12 @@ const { pagePosts, currentPage, lastPage, totalPosts } = Astro.props;
   </div>
 
   <div class="feed">
-    {pagePosts.map((post, i) => (
+    {pagePosts.map((post) => (
       post.data.template === 'photos'
-        ? <PostCardPhoto {post} entryIndex={(currentPage - 1) * 8 + i} />
-        : <PostCard {post} entryIndex={(currentPage - 1) * 8 + i} />
+        ? <PostCardPhoto {post} entryNum={entryNums[post.id]} />
+        : post.data.template === 'review'
+          ? <PostCardReview {post} entryNum={entryNums[post.id]} />
+          : <PostCard {post} entryNum={entryNums[post.id]} />
     ))}
   </div>
 
@@ -71,7 +77,7 @@ const { pagePosts, currentPage, lastPage, totalPosts } = Astro.props;
   .feed-issue {
     font-family: var(--font-headline);
     font-weight: 800;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -79,10 +85,11 @@ const { pagePosts, currentPage, lastPage, totalPosts } = Astro.props;
 
   .feed-count {
     font-family: var(--font-label);
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-outline);
+    margin-left: auto;
   }
 
   .feed-header__rule {

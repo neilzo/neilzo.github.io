@@ -14,7 +14,7 @@ const { index, title, subtitle } = Astro.props;
       <h2 class="fav-section__title">{title}</h2>
       {subtitle && <span class="fav-section__subtitle">{subtitle}</span>}
     </div>
-    <div class="fav-section__rule"></div>
+    <!--<div class="fav-section__rule"></div>-->
   </header>
   <ul class="fav-section__list">
     <slot />
@@ -35,12 +35,14 @@ const { index, title, subtitle } = Astro.props;
     align-items: baseline;
     gap: 0.75rem;
     padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
   }
 
   .fav-section__index {
     font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.6rem;
+    font-size: 0.875rem;
     letter-spacing: 0.15em;
     color: var(--color-secondary);
     text-transform: uppercase;
@@ -49,7 +51,7 @@ const { index, title, subtitle } = Astro.props;
   .fav-section__title {
     font-family: var(--font-headline);
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -58,8 +60,7 @@ const { index, title, subtitle } = Astro.props;
 
   .fav-section__subtitle {
     font-family: var(--font-body);
-    font-style: italic;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     color: var(--color-outline);
     margin-left: auto;
   }

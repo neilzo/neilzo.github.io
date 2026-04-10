@@ -2,11 +2,14 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PostCard from '../components/posts/PostCard.astro';
 import PostCardPhoto from '../components/posts/PostCardPhoto.astro';
+import PostCardReview from '../components/posts/PostCardReview.astro';
 import Pagination from '../components/ui/Pagination.astro';
 import { getAllPosts } from '../utils/getAllPosts';
+import { computeEntryNumbers } from '../utils/computeEntryNumbers';
 
 const PAGE_SIZE = 8;
 const allPosts = await getAllPosts();
+const entryNums = computeEntryNumbers(allPosts);
 const pagePosts = allPosts.slice(0, PAGE_SIZE);
 const lastPage = Math.ceil(allPosts.length / PAGE_SIZE);
 ---
@@ -14,17 +17,18 @@ const lastPage = Math.ceil(allPosts.length / PAGE_SIZE);
 <SiteLayout title="The Ordered Archive" activeNav="Home">
   <div class="feed-header">
     <div class="feed-header__eyebrow">
-      <span class="feed-issue">The Permanent Record</span>
       <span class="feed-count">{allPosts.length} entries</span>
     </div>
     <div class="feed-header__rule"></div>
   </div>
 
   <div class="feed">
-    {pagePosts.map((post, i) => (
+    {pagePosts.map((post) => (
       post.data.template === 'photos'
-        ? <PostCardPhoto {post} entryIndex={i} />
-        : <PostCard {post} entryIndex={i} />
+        ? <PostCardPhoto {post} entryNum={entryNums[post.id]} />
+        : post.data.template === 'review'
+          ? <PostCardReview {post} entryNum={entryNums[post.id]} />
+          : <PostCard {post} entryNum={entryNums[post.id]} />
     ))}
   </div>
 
@@ -52,7 +56,7 @@ const lastPage = Math.ceil(allPosts.length / PAGE_SIZE);
   .feed-issue {
     font-family: var(--font-headline);
     font-weight: 800;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -60,10 +64,11 @@ const lastPage = Math.ceil(allPosts.length / PAGE_SIZE);
 
   .feed-count {
     font-family: var(--font-label);
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-outline);
+    margin-left: auto;
   }
 
   .feed-header__rule {

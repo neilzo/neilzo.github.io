@@ -5,11 +5,11 @@ import TagList from '../ui/TagList.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
-  entryIndex?: number;
+  entryNum?: string;
 }
-const { post, entryIndex } = Astro.props;
+const { post, entryNum: entryNumProp } = Astro.props;
 const { data } = post;
-const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryIndex + 1).padStart(3, '0') : undefined);
+const entryNum = entryNumProp ?? data.entryNumber;
 ---
 
 <div class="post-meta">
@@ -33,17 +33,17 @@ const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryInd
       <span class="meta-value">{data.location}</span>
     </div>
   )}
-  {data.template === 'photos' && data.rating !== undefined && (
-    <div class="meta-block">
-      <span class="meta-label">Rating</span>
-      <span class="meta-value meta-rating">
-        {Array.from({ length: 5 }, (_, i) => (
-          <span class={`star${i < data.rating! ? ' star--filled' : ''}`} aria-hidden="true">
-            {i < data.rating! ? '★' : '☆'}
-          </span>
-        ))}
-      </span>
-    </div>
+  {(data.template === 'review' || (data.template === 'photos' && data.rating !== undefined)) && (
+    <!--<div class="meta-block">-->
+    <!--  <span class="meta-label">Rating</span>-->
+    <!--  <span class="meta-value meta-rating" aria-label={`${data.rating} out of 5`}>-->
+    <!--    {Array.from({ length: 5 }, (_, i) => (-->
+    <!--      <span class={`star${i < (data.rating ?? 0) ? ' star&#45;&#45;filled' : ''}`} aria-hidden="true">-->
+    <!--        {i < (data.rating ?? 0) ? '★' : '☆'}-->
+    <!--      </span>-->
+    <!--    ))}-->
+    <!--  </span>-->
+    <!--</div>-->
   )}
 </div>
 
@@ -57,7 +57,7 @@ const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryInd
   .meta-entry {
     font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.55rem;
+    font-size: 0.625rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-secondary);
@@ -65,7 +65,7 @@ const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryInd
 
   .meta-date {
     font-family: var(--font-label);
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-outline);
@@ -88,7 +88,7 @@ const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryInd
   .meta-label {
     font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-outline);
@@ -96,7 +96,7 @@ const entryNum = data.entryNumber ?? (entryIndex !== undefined ? String(entryInd
 
   .meta-value {
     font-family: var(--font-body);
-    font-size: 0.75rem;
+    font-size: 0.825rem;
     color: var(--color-on-surface-variant);
   }
 

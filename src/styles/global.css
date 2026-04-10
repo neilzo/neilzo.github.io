@@ -3,7 +3,7 @@
 @theme {
   /* Colors */
   --color-primary: #173124;
-  --color-secondary: #944925;
+  --color-secondary: #A65D46;
   --color-surface: #fbf9f4;
   --color-surface-bright: #fbf9f4;
   --color-surface-dim: #dbdad5;
@@ -20,7 +20,7 @@
   --color-on-surface-variant: #424844;
   --color-on-primary: #ffffff;
   --color-on-secondary: #ffffff;
-  --color-outline: #727973;
+  --color-outline: rgb(23 49 36 / 0.8);
   --color-outline-variant: #c2c8c2;
   --color-primary-container: #2d4739;
   --color-primary-fixed: #ccead6;

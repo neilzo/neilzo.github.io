@@ -123,11 +123,11 @@
   background: var(--color-primary);
   color: var(--color-on-primary);
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 400;
   padding: 8px 12px;
-  min-width: 160px;
-  max-width: 280px;
+  min-width: 240px;
+  max-width: 320px;
   white-space: normal;
   z-index: 100;
   border: 1px solid var(--color-outline-variant);

@@ -2,23 +2,26 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostCard from '../../components/posts/PostCard.astro';
 import PostCardPhoto from '../../components/posts/PostCardPhoto.astro';
+import PostCardReview from '../../components/posts/PostCardReview.astro';
 import { getAllPosts } from '../../utils/getAllPosts';
+import { computeEntryNumbers } from '../../utils/computeEntryNumbers';
 import { ALL_TAGS, tagToSlug, slugToTag } from '../../utils/getPostsByTag';
 
 export async function getStaticPaths() {
   const allPosts = await getAllPosts();
+  const entryNums = computeEntryNumbers(allPosts);
 
   return ALL_TAGS.map(tag => {
     const slug = tagToSlug(tag);
     const filtered = allPosts.filter(post => post.data.tags.includes(tag));
     return {
       params: { tag: slug },
-      props: { posts: filtered, tagLabel: tag, tagSlug: slug },
+      props: { posts: filtered, tagLabel: tag, tagSlug: slug, entryNums },
     };
   });
 }
 
-const { posts, tagLabel, tagSlug } = Astro.props;
+const { posts, tagLabel, tagSlug, entryNums } = Astro.props;
 ---
 
 <SiteLayout title={`${tagLabel} — The Ordered Archive`} activeTag={tagSlug}>
@@ -37,10 +40,12 @@ const { posts, tagLabel, tagSlug } = Astro.props;
       <p class="tag-empty">No entries yet under this category.</p>
     ) : (
       <div class="tag-feed">
-        {posts.map((post, i) => (
+        {posts.map((post) => (
           post.data.template === 'photos'
-            ? <PostCardPhoto {post} entryIndex={i} />
-            : <PostCard {post} entryIndex={i} />
+            ? <PostCardPhoto {post} entryNum={entryNums[post.id]} />
+            : post.data.template === 'review'
+              ? <PostCardReview {post} entryNum={entryNums[post.id]} />
+              : <PostCard {post} entryNum={entryNums[post.id]} />
         ))}
       </div>
     )}
@@ -95,7 +100,7 @@ const { posts, tagLabel, tagSlug } = Astro.props;
 
   .tag-header__count {
     font-family: var(--font-label);
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-outline);

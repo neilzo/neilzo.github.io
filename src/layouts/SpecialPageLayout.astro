@@ -15,9 +15,6 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
 <SiteLayout {title} activeNav={activeNav ?? title}>
   <div class="special-page">
     <header class="special-header">
-      {sectionLabel && (
-        <span class="special-header__label">{sectionLabel}</span>
-      )}
       <div class="special-header__title-row">
         <div class="special-header__accent"></div>
         <h1 class="special-header__title">{title}</h1>
@@ -30,7 +27,7 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
           Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
         </p>
       )}
-      <div class="special-header__rule"></div>
+      <!--<div class="special-header__rule"></div>-->
     </header>
 
     <div class="special-body">
@@ -46,13 +43,13 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
   }
 
   .special-header {
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
   }
 
   .special-header__label {
     font-family: var(--font-label);
     font-weight: 700;
-    font-size: 0.55rem;
+    font-size: 0.625rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-outline);
@@ -87,7 +84,6 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
 
   .special-header__subtitle {
     font-family: var(--font-body);
-    font-style: italic;
     font-size: 1rem;
     color: var(--color-on-surface-variant);
     margin: 0 0 0.75rem;
@@ -96,7 +92,7 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
 
   .special-header__updated {
     font-family: var(--font-label);
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-outline);

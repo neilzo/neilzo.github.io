@@ -37,6 +37,12 @@ const posts = defineCollection({
       rating: z.number().min(0).max(5).optional(),
       ...sharedPostFields,
     }),
+    z.object({
+      template: z.literal('review'),
+      rating: z.number().min(0).max(5),
+      excerpt: z.string(), // required — this is the full review text
+      ...sharedPostFields,
+    }),
   ]),
 });
 
