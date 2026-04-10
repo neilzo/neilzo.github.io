@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  creator?: string;
+  note?: string;
+  label?: string;
+  queued?: boolean;
+}
+const { title, creator, note, label, queued } = Astro.props;
+---
+
+<div class:list={['current-item', { 'current-item--queued': queued }]}>
+  {label && <span class="current-item__label">{label}</span>}
+  <span class="current-item__title">{title}</span>
+  {creator && <span class="current-item__creator">{creator}</span>}
+  {note && <p class="current-item__note">{note}</p>}
+</div>
+
+<style>
+  .current-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .current-item--queued {
+    opacity: 0.55;
+  }
+
+  .current-item__label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .current-item__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .current-item__creator {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .current-item__note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.25rem 0 0;
+  }
+</style>

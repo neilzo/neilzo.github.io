@@ -80,9 +80,29 @@ const setup = defineCollection({
   }),
 });
 
+const favorites = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
+const currently = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   posts,
   'pages-special': pagesSpecial,
   about,
   setup,
+  favorites,
+  currently,
 };

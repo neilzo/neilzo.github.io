@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="current-section">
+  <h2 class="current-section__title">{title}</h2>
+  <div class="current-items">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .current-section {
+    /* intentionally unstyled wrapper */
+  }
+
+  .current-section__title {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(194, 200, 194, 0.35);
+  }
+
+  .current-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+</style>

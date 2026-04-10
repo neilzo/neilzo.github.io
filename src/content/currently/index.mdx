@@ -1,0 +1,47 @@
+---
+title: Currently
+subtitle: What I'm reading, watching, and playing right now.
+updatedDate: 2024-11-01
+---
+
+import CurrentSection from '../../components/currently/CurrentSection.astro';
+import CurrentItem from '../../components/currently/CurrentItem.astro';
+
+<CurrentSection title="Reading">
+  <CurrentItem
+    title="The Death of Ivan Ilyich"
+    creator="Tolstoy"
+    note="Re-reading this. Short, devastating, perfect."
+  />
+  <CurrentItem
+    title="A Pattern Language"
+    creator="Alexander et al."
+    label="Up next"
+    queued
+  />
+</CurrentSection>
+
+<CurrentSection title="Watching">
+  <CurrentItem
+    title="Shogun"
+    creator="FX"
+    note="Midway through. The production design is extraordinary."
+  />
+  <CurrentItem
+    title="Chungking Express"
+    creator="WKW · Rewatch"
+    note="Annual watch. The Faye Wong scenes still land."
+  />
+</CurrentSection>
+
+<CurrentSection title="Playing">
+  <CurrentItem
+    title="Balatro"
+    note="The best card game design in a decade. The poker-roguelike combination shouldn't work this well."
+  />
+</CurrentSection>
+
+<CurrentSection title="Listening">
+  <CurrentItem title="Bright Magic" creator="Fatima Al Qadiri" />
+  <CurrentItem title="Cavalcade" creator="black midi" />
+</CurrentSection>

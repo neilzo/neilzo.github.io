@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import remarkFootnoteTooltip from './src/plugins/remark-footnote-tooltip.mjs';
+import remarkExternalLinks from './src/plugins/remark-external-links.mjs';
 
 export default defineConfig({
   site: 'https://neildaftary.com',
@@ -12,6 +13,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    remarkPlugins: [remarkFootnoteTooltip],
+    remarkPlugins: [remarkFootnoteTooltip, remarkExternalLinks],
   },
 });
