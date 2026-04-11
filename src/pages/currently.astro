@@ -14,21 +14,5 @@ const { title, subtitle, updatedDate } = entry.data;
   {updatedDate}
   activeNav="Currently"
 >
-  <div class="currently-grid">
-    <Content />
-  </div>
+  <Content />
 </SpecialPageLayout>
-
-<style>
-  .currently-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  @media (min-width: 640px) {
-    .currently-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-</style>

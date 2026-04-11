@@ -1,14 +1,17 @@
 ---
 interface Props {
   label: string;
+  index?: string;
 }
-const { label } = Astro.props;
+const { label, index } = Astro.props;
 ---
 
 <section class="setup-cat">
   <header class="setup-cat__header">
-    <h2 class="setup-cat__title">{label}</h2>
-    <div class="setup-cat__rule"></div>
+    <div class="setup-cat__title-row">
+      {index && <span class="setup-cat__index">{index}.</span>}
+      <h2 class="setup-cat__title">{label}</h2>
+    </div>
   </header>
   <ul class="setup-cat__list">
     <slot />
@@ -17,47 +20,39 @@ const { label } = Astro.props;
 
 <style>
   .setup-cat {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
-  .setup-cat__header {
+  .setup-cat__title-row {
     display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    margin-bottom: 0.5rem;
+    align-items: baseline;
+    gap: 0.75rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(194, 200, 194, 0.4);
+    margin-bottom: 1rem;
+    margin-top: 5rem;
   }
 
-  .setup-cat__icon {
-    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    font-size: 1rem;
+  .setup-cat__index {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
     color: var(--color-secondary);
+    text-transform: uppercase;
   }
 
   .setup-cat__title {
     font-family: var(--font-headline);
     font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-primary);
     margin: 0;
-    flex: 1;
-  }
-
-  .setup-cat__rule {
-    height: 1px;
-    display: none;
   }
 
   .setup-cat__list {
     margin: 0;
     padding: 0;
-  }
-
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    font-size: 1rem;
   }
 </style>

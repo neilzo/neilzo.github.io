@@ -79,6 +79,18 @@
   box-sizing: border-box;
 }
 
+a {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(166 93 70 / 0.45);
+  transition: text-decoration-color 0.15s, color 0.15s;
+}
+
+a:hover {
+  text-decoration-color: rgb(166 93 70 / 1);
+}
+
 html {
   scroll-behavior: smooth;
 }

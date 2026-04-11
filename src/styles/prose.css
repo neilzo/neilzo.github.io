@@ -36,13 +36,7 @@
 }
 
 .prose a {
-  color: var(--color-secondary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.prose a:hover {
-  color: var(--color-primary);
+  /* inherits global a style — secondary color, underline with offset */
 }
 
 .prose blockquote {
