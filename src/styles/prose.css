@@ -58,12 +58,25 @@
 
 .prose ul,
 .prose ol {
-  padding-left: 1.5rem;
+  padding-left: 0;
   margin-bottom: 1.5rem;
+  list-style: none;
 }
 
 .prose li {
   margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.prose ul li::before,
+.prose ol li::before {
+  content: '■';
+  color: var(--color-secondary);
+  font-size: 0.625em;
+  position: absolute;
+  left: 0;
+  top: 0.475em;
 }
 
 .prose hr {

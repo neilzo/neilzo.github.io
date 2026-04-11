@@ -155,6 +155,30 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
     margin: 0.375rem 0 0;
   }
 
+  .special-body :global(ul) {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .special-body :global(li) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 0.375rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .special-body :global(ul li::before) {
+    content: '■';
+    color: var(--color-secondary);
+    font-size: 0.5em;
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+  }
+
   /* Meta/creator line: italic-only paragraph immediately after h2 or h3 */
   .special-body :global(h2 + p:has(> em:only-child)),
   .special-body :global(h3 + p:has(> em:only-child)) {
