@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import PostMeta from './PostMeta.astro';
+import StarRating from '../ui/StarRating.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -23,13 +24,7 @@ const { title, excerpt, rating } = data;
     <!--<div class="review-card__label">— Micro Review</div>-->
     <h2 class="review-card__title">{title}</h2>
     <p class="review-card__text">{excerpt}</p>
-    <div class="review-card__stars" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span class={`star${i < rating ? ' star--filled' : ''}`} aria-hidden="true">
-          {i < rating ? '★' : '☆'}
-        </span>
-      ))}
-    </div>
+    <StarRating {rating} />
   </div>
 </article>
 
@@ -87,17 +82,4 @@ const { title, excerpt, rating } = data;
     margin: 0;
   }
 
-  .review-card__stars {
-    display: flex;
-    gap: 0.125rem;
-    font-size: 1rem;
-  }
-
-  .star {
-    color: var(--color-outline-variant);
-  }
-
-  .star--filled {
-    color: var(--color-secondary);
-  }
 </style>

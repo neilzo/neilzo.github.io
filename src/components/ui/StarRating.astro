@@ -1,0 +1,47 @@
+---
+interface Props {
+  rating: number;
+  max?: number;
+}
+const { rating, max = 5 } = Astro.props;
+
+const stars = Array.from({ length: max }, (_, i) => {
+  const full = i + 1 <= rating;
+  const half = !full && i + 0.5 <= rating;
+  return { cls: `star${full ? ' star--filled' : half ? ' star--half' : ''}` };
+});
+---
+
+<div class="star-rating" aria-label={`${rating} out of ${max} stars`}>
+  {stars.map(({ cls }) => (
+    <span class={cls} aria-hidden="true">★</span>
+  ))}
+</div>
+
+<style>
+  .star-rating {
+    display: flex;
+    gap: 0.125rem;
+    font-size: 1rem;
+  }
+
+  .star {
+    display: inline-block;
+    position: relative;
+    color: var(--color-outline-variant);
+  }
+
+  .star--filled {
+    color: var(--color-secondary);
+  }
+
+  /* Half star: base character shows as empty (right half), ::before clips to left half in filled color */
+  .star--half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-secondary);
+    clip-path: inset(0 50% 0 0);
+  }
+</style>
