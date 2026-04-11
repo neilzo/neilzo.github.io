@@ -38,7 +38,7 @@ export default function remarkFootnoteTooltip() {
             const content = match[2];
             newChildren.push({
               type: 'html',
-              value: `<span class="fn-marker" tabindex="0" aria-describedby="${id}" data-fn="${counter}">${counter}<span id="${id}" role="tooltip" class="fn-tooltip" aria-hidden="true">${escapeHtml(content)}</span></span>`,
+              value: `<span class="fn-marker" tabindex="0" aria-describedby="${id}" data-fn="${counter}">[${counter}]<span id="${id}" role="tooltip" class="fn-tooltip" aria-hidden="true">${escapeHtml(content)}</span></span>`,
             });
           }
 

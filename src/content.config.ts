@@ -46,17 +46,6 @@ const posts = defineCollection({
   ]),
 });
 
-const pagesSpecial = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    subtitle: z.string().optional(),
-    updatedDate: z.coerce.date().optional(),
-    sectionLabel: z.string().optional(),
-    pageKey: z.enum(['favorites', 'currently', 'setup']),
-  }),
-});
-
 const about = defineCollection({
   type: 'content',
   schema: z.object({
@@ -101,7 +90,6 @@ const currently = defineCollection({
 
 export const collections = {
   posts,
-  'pages-special': pagesSpecial,
   about,
   setup,
   favorites,

@@ -106,4 +106,69 @@ const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
     opacity: 0.1;
     margin-top: 1.5rem;
   }
+
+  /* Markdown content styles */
+  .special-body {
+    counter-reset: section;
+  }
+
+  .special-body :global(h2) {
+    counter-increment: section;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 5rem 0 0.75rem;
+  }
+
+  .special-body :global(h2::before) {
+    content: counter(section, decimal-leading-zero) ".";
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    color: var(--color-secondary);
+    flex-shrink: 0;
+  }
+
+  .special-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .special-body :global(h3) {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0;
+  }
+
+  .special-body :global(p) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.375rem 0 0;
+  }
+
+  /* Meta/creator line: italic-only paragraph immediately after h2 or h3 */
+  .special-body :global(h2 + p:has(> em:only-child)),
+  .special-body :global(h3 + p:has(> em:only-child)) {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    line-height: 1;
+    margin-top: 0.25rem;
+  }
+
+  .special-body :global(h2 + p:has(> em:only-child) > em),
+  .special-body :global(h3 + p:has(> em:only-child) > em) {
+    font-style: normal;
+  }
 </style>

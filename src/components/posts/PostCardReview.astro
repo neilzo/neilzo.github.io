@@ -14,6 +14,14 @@ const { data } = post;
 if (data.template !== 'review') throw new Error('PostCardReview requires template: review');
 
 const { title, excerpt, rating } = data;
+
+// Parse inline markdown: links, bold, italic
+function renderInline(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}
 ---
 
 <article class="review-card">
@@ -23,7 +31,7 @@ const { title, excerpt, rating } = data;
   <div class="review-card__body">
     <!--<div class="review-card__label">— Micro Review</div>-->
     <h2 class="review-card__title">{title}</h2>
-    <p class="review-card__text">{excerpt}</p>
+    <p class="review-card__text" set:html={renderInline(excerpt)} />
     <StarRating {rating} />
   </div>
 </article>

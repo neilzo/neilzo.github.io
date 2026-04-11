@@ -1,0 +1,402 @@
+---
+template: text
+title: AI Coding
+date: 2026-04-13
+tags: [Software]
+excerpt: How I use AI to code
+---
+
+A practical guide for how to use AI coding tools.
+
+## Do and don’t do:
+
+Use AI to:
+
+* understand the codebase
+* get to a good first draft faster
+* make planning and implementation faster
+* break down complex problems
+* review code before you put it up for human review
+
+Don’t use AI for:
+
+* vague implementations with no constraints or product context
+* one-shot generation of large changes you don’t verify or don’t understand
+* adding unnecessary complexity
+
+## Focus on the coding environment
+
+AI coding tools are only as good as the environment you give them.
+
+The environment includes:
+
+* a repo’s code conventions and organization
+* engineering principles and standards
+* access to the right tools and systems
+* a planning workflow for larger changes
+* fast feedback loops with logging, linting, type checking, tests, and manual validation
+
+The move of these you add, the higher the quality and less iterations you have to go through.
+
+## 1) Start with explicit repo rules
+
+One of the easiest improvements is giving the agent instructions it can reuse every time.
+
+That starts with an `AGENTS.md` file.
+
+I have mine saved in `~/.codex/` since it’s shared across repos. You can also create repo specific AGENTS.md if you’d like.
+
+AGENTS.md saves you from repeating the same corrections every time, and it helps the agent avoid repeated or annoying mistakes.
+
+A good `AGENTS.md` should answer questions like:
+
+* What must always be run after a change?
+* What should never be run?
+* What style conventions matter in this repo?
+* When should the agent ask before proceeding?
+* What docs should it consult for additional guidance?
+
+The more specific, short, and practical you make your rules, the better.
+
+### Pair it with a principles doc
+
+Working agreements are for repeatable rules. Principles are for implementation constraints and style. This isn’t widely recommended, but I’ve found it helpful to limit complexity.
+
+I keep a separate `principles.md` for things like:
+
+* to prefer clarity over cleverness
+* making code as readable as possible
+* use the single responsibility principle, but don’t overly abuse it
+* don’t overuse DRY (this creates unnecessary abstraction)
+* avoid framework coupling
+* when designing a feature or system, make it “Boring. Simple. Understandable.”
+
+I’ll link that separately, but the important pattern is:
+
+* `AGENTS.md` = short operational rules
+* `principles.md` = how to approach implementing large features or refactors
+
+## 2) Prompt for planning before implementation
+
+When the task is more than a small edit, don’t start by asking the agent to code. Instead, start by asking it to plan.
+
+That usually means:
+
+1. Switching to your agent’s planning mode
+2. pasting in the Jira ticket description directly into the prompt
+3. optional: using a Jira MCP server to fetch the ticket details and related context
+
+Model Context Protocol (MCP) gives tools like Cursor or Codex access to external systems and developer tools, and all the AI tools we use support MCPs.
+
+### Planning mode
+
+A simple pattern that works well:
+
+1. Ask the agent to read the task or requirements.
+2. Ask it to inspect the relevant code paths or provide the code paths for the agent yourself.
+3. Ask it to write a `plan.md` file. I don’t commit my plan files, but I save them to a separate dir in my home directory.
+4. Have that plan broken into milestones.
+5. Then execute milestone by milestone.
+
+`plan.md` can include:
+
+* a short problem statement
+* relevant files and systems
+* assumptions and unknowns
+* risks
+* milestone breakdown
+* validation steps for each milestone
+
+Example prompt shape:
+
+```text
+Read this task and inspect the relevant code paths first. Do not implement yet.
+
+Create a plan.md that includes:
+- problem statement
+- affected files/systems
+- risks and unknowns
+- milestones
+- validation plan per milestone
+
+Use the coding principles in ~/.codex/principles.md for large changes.
+```
+
+This does two things:
+
+* it forces decomposition before action
+* you can reduce the context window implementing each milestone separately
+* it gives you something reviewable before the repo changes
+* it makes returning to the plan easier, and you can optionally provide it as context in future sessions.
+
+That is especially useful for feature work, refactors, performance work, and anything that spans multiple files or steps.
+
+## 3) Use MCP servers to pull in the right context
+
+MCP allows your AI coding tools to reach out to systems outside the local codebase.
+
+Useful examples:
+
+* Jira MCP for ticket context
+* GitHub MCP for PRs, review threads, and repo context
+
+### Why this matters
+
+Without MCP, you often end up manually pasting context into the prompt.
+
+With MCP, the agent can often fetch:
+
+* the exact ticket description
+* acceptance criteria
+* linked PRs or issues
+* review comments
+* related code or documentation
+
+I recommend adding the Jira MCP and GitHub MCP.
+
+References:
+
+* Cursor MCP docs: https://cursor.com/docs/mcp
+* OpenAI Codex MCP docs: https://developers.openai.com/codex/mcp
+
+## 4) Treat skills as reusable workflows
+
+Once you notice yourself repeating a workflow, it should probably stop living only in prompts.
+
+OpenAI defines agent skills as reusable packages of instructions, resources, and optional scripts for task-specific workflows that can be shared across teams:
+https://developers.openai.com/codex/skills
+
+You can think of a skill as:
+
+* a durable prompt
+* plus the right supporting docs
+* plus any helper scripts or structure needed to make the workflow repeatable
+
+Good candidates for skills:
+
+* reviewing a PR, i.e. a code reviewer skill
+* addressing or debugging a recurring type of issue, e.g. performance
+* writing migrations
+* writing tests
+* making UI accessible
+
+References:
+
+* Cursor skills docs: https://cursor.com/docs/skills
+* OpenAI Codex skills docs: https://developers.openai.com/codex/skills
+
+## 5) Use subagents for specialized parallel work
+
+Subagents are useful if you want to increase the output of the agent by running multiple in parallel.
+
+OpenAI’s Codex docs describe subagents as specialized agents that can be spawned in parallel for complex work such as codebase exploration or multi-step feature plans, then consolidated into one response: https://developers.openai.com/codex/subagents
+
+Possible subagents could be:
+
+* one agent explores the codebase
+* one agent reviews the implementation against principles or any constraints you give it
+* one agent writes or improves tests
+* one agent checks migration or rollout risks
+
+Two examples:
+
+### Code reviewer subagent
+
+Create a subagent whose job is to review changes against `principles.md`.
+
+I want this kind of “reviewer” to look for things like:
+
+* unnecessary complexity
+* leaky abstractions
+* naming quality
+* coupling that seems avoidable
+* risky changes with weak validation
+* changes that are technically correct but hard to maintain
+
+### Test-writing subagent
+
+Create another subagent focused on test coverage.
+
+That agent can:
+
+* identify missing cases
+* propose test structure
+* write targeted tests
+* point out weak assertions
+* suggest where manual validation is still needed
+
+You may by now recognize the overlap between skills and subagents. I like to think of subagents as taking a skill and being able to run multiple skills in parallel. I.e., subagents are essentially more direct and parallelizable version of skills.
+
+References:
+
+* Cursor subagents docs: https://cursor.com/docs/subagents
+* OpenAI Codex subagents docs: https://developers.openai.com/codex/subagents
+
+## 6) Keep the agent inside tight feedback loops
+
+The best results usually come from shorter cycles with validation, and not long speculative generations.
+
+That means the workflow should repeatedly hit:
+
+* linting
+* type checking
+* focused test runs
+* manual validation when needed
+* code review feedback
+
+This is where AGENTS.md can help. For example, I want the agent to automatically do things like:
+
+* run `yarn lint`
+* run `npx tsc`
+* run tests for affected files
+* run `bundle exec rubocop -A`
+* look at logs to validate changes, and if they don’t currently exist, add them before implementing a change.
+
+This allows the agent to run longer, with more autonomy, while reducing errors.
+
+### Consider using Red/green TDD
+
+This is basically Test Driven Development, but with an agent. First, you have the agent generate failing tests (verify they’re correct of course!) before going into implementation. Once something has been implemented, the agent can use the tests to check their own work.
+
+For example:
+
+1. ask the agent to write or update a test first
+2. confirm the test fails
+3. implement the minimum change
+4. confirm the test passes
+5. refactor if needed
+
+Reference:
+
+* Red/green TDD: https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/
+
+### Have the agent manual test
+
+Passing tests don’t always prove the feature works as expected.
+
+Instead of manually testing yourself, you can have the agent do it for you!
+
+For frontend work, that may mean:
+
+* run the app
+* navigate the flow
+* verify the state/UI changes work as expected
+* confirm the edge case actually behaves correctly
+
+For backend work, it may mean:
+
+* run targeted scripts
+* hit the endpoint directly and check a response(s)
+* inspect logs
+* run SQL queries on the DB to verify data was saved as expected
+
+Reference:
+
+* Agentic manual testing: https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/
+
+## 7) Use “harness engineering” to go further than prompting
+
+You can have the agent do more by improving the environment around the agent.
+
+Bassim Eledath describes harness engineering as building the tooling, environment, and automated feedback loops that let agents work reliably without constant human intervention.
+
+That includes things like:
+
+* repo-specific instructions. E.g. how to run the dev server.
+* validation steps or commands. E.g. how to run tests.
+* easy access to task context. E.g. a plan doc and/or the ticket requirements.
+* product workflows. E.g. Agentic UI testing.
+* any applicable docs. E.g. if you’re working with an open source library, provide a URL to their docs.
+
+Reference:
+
+* Harness engineering and automated feedback loops: https://www.bassimeledath.com/blog/levels-of-agentic-engineering#level-6-harness-engineering--automated-feedback-loops
+
+### B. Use GitHub MCP for an initial code review and PR comment triage
+
+Instead of manually reviewing a PR at first, have the agent use GitHub context to produce an initial review.
+
+Useful requests here:
+
+* summarize the PR for your own understanding
+* identify risky files or behavior changes
+* group review comments by theme or severity (i.e. high, medium, and low impact).
+* propose a review, i.e, any comments to make
+* if you like, suggest fixes for each comment
+* draft self-review comments on your own PR
+
+This is not a replacement for human review. Instead, it’s a way to speed up a first pass and reduce the time spent responding to feedback.
+
+A possible sequence:
+
+1. fetch the PR via GitHub MCP by giving it a PR URL.
+2. ask for an initial review grouped by severity (e.g. high, medium, and low) or theme.
+3. ask for an improvements plan.
+4. implement fixes one at a time.
+5. rerun lint, types, tests, and manual checks.
+6. ask for a final pass before pushing updates.
+
+## Practical prompting patterns I’ve found useful
+
+### Ask for inspection before action
+
+```text
+Inspect the relevant code paths and summarize your understanding before making changes.
+Call out assumptions, risks, and open questions.
+```
+
+### Ask for milestone validation-based execution
+
+```text
+After each milestone, summarize what has changed, how it was validated, and update the plan doc.
+```
+
+### Ask for minimal implementation
+
+```text
+Make the smallest change or plan that meets the requirements.
+Preserve existing behaviors unless the requirements explicitly changes them.
+```
+
+### Ask for validation and save results
+
+```text
+After code changes and manual testing, write logs/results/etc to a file.
+```
+
+### Ask for review against principles
+
+```text
+Review this change against ~/.codex/principles.md. Look for complexity, naming issues, maintainability risks, and rank any improvements by high/medium/low impact.
+```
+
+## What tends to work well
+
+* small to medium scoped changes or milestones with clear validation
+* test generation when the intended behavior is clear
+* breaking down larger tasks into milestones
+
+## What tends to go badly
+
+* big prompts asking for design, implementation, and testing all at once
+* unclear acceptance criteria or requirements
+* no validation steps
+* letting the agent make large changes without verifying or checking what has changed
+* trusting passing tests as the only signal
+
+## Links
+
+### Official docs
+
+* Cursor MCP: https://cursor.com/docs/mcp
+* OpenAI Codex MCP: https://developers.openai.com/codex/mcp
+* Cursor skills: https://cursor.com/docs/skills
+* OpenAI Codex skills docs: https://developers.openai.com/codex/skills
+* Cursor subagents: https://cursor.com/docs/subagents
+* OpenAI Codex subagents docs: https://developers.openai.com/codex/subagents
+
+### Articles
+
+* Red/green TDD: https://simonwillison.net/guides/agentic-engineering-patterns/red-green-tdd/
+* Agentic manual testing: https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/
+* Harness engineering and feedback loops: https://www.bassimeledath.com/blog/levels-of-agentic-engineering#level-6-harness-engineering--automated-feedback-loops
