@@ -65,7 +65,7 @@ const about = defineCollection({
       z.object({
         label: z.string(),
         url: z.string().url(),
-        description: z.string(),
+        description: z.string().optional(),
       })
     ).optional(),
     updatedDate: z.coerce.date().optional(),
@@ -77,6 +77,7 @@ const setup = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional(),
+    updatedDate: z.coerce.date().optional(),
   }),
 });
 

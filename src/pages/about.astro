@@ -28,7 +28,7 @@ const { tagline, links, updatedDate } = aboutEntry.data;
               <a href={link.url} class="about-link__label" target="_blank" rel="noopener noreferrer">
                 {link.label}
               </a>
-              <p class="about-link__desc">{link.description}</p>
+              {link.description && <p class="about-link__desc">{link.description}</p>}
             </div>
           ))}
         </div>
