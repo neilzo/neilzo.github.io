@@ -1,20 +1,48 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
-  src: string;
+  src: ImageMetadata | string;
   alt: string;
   caption?: string;
   plateLabel?: string;
+  lightboxIndex?: number;
 }
-const { src, alt, caption, plateLabel } = Astro.props;
+const { src, alt, caption, plateLabel, lightboxIndex } = Astro.props;
+const isLocal = typeof src !== 'string';
+const hasLightbox = lightboxIndex !== undefined;
 ---
 
 <figure class="image-frame">
   <div class="image-frame__mat">
-    <img src={src} alt={alt} class="image-frame__img" loading="lazy" />
+    {hasLightbox ? (
+      <button
+        class="image-frame__lightbox-trigger"
+        data-lightbox-index={lightboxIndex}
+        aria-label={`View larger: ${alt}`}
+        type="button"
+      >
+        {isLocal
+          ? <Image src={src as ImageMetadata} {alt} class="image-frame__img" />
+          : <img src={src as string} {alt} class="image-frame__img" loading="lazy" />
+        }
+      </button>
+    ) : (
+      isLocal
+        ? <Image src={src as ImageMetadata} {alt} class="image-frame__img" />
+        : <img src={src as string} {alt} class="image-frame__img" loading="lazy" />
+    )}
     {plateLabel && (
       <div class="image-frame__plate">
         <span>{plateLabel}</span>
         {caption && <span class="image-frame__caption-inline"> — {caption}</span>}
+      </div>
+    )}
+    {hasLightbox && (
+      <div class="image-frame__expand-badge" aria-hidden="true">
+        <span class="material-symbols-outlined">open_in_full</span>
+        Expand
       </div>
     )}
   </div>
@@ -34,6 +62,15 @@ const { src, alt, caption, plateLabel } = Astro.props;
     padding: 0.75rem;
     position: relative;
     overflow: hidden;
+  }
+
+  .image-frame__lightbox-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
   }
 
   .image-frame__img {
@@ -62,6 +99,29 @@ const { src, alt, caption, plateLabel } = Astro.props;
     padding: 0.25rem 0.5rem;
   }
 
+  .image-frame__expand-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background: var(--color-primary);
+    color: white;
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    pointer-events: none;
+  }
+
+  .image-frame__expand-badge .material-symbols-outlined {
+    font-size: 0.75rem;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+  }
+
   .image-frame__caption-inline {
     font-weight: 400;
     text-transform: none;
@@ -70,7 +130,6 @@ const { src, alt, caption, plateLabel } = Astro.props;
 
   .image-frame__caption {
     font-family: var(--font-body);
-    font-style: italic;
     font-size: 0.875rem;
     color: var(--color-outline);
     margin-top: 0.5rem;

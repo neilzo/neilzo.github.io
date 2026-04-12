@@ -1,8 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import SiteLayout from './SiteLayout.astro';
 import TagList from '../components/ui/TagList.astro';
 import PostImageFrame from '../components/posts/PostImageFrame.astro';
+import Lightbox from '../components/posts/Lightbox.astro';
 import { formatDate } from '../utils/formatDate';
 
 interface Props {
@@ -11,6 +13,29 @@ interface Props {
 const { post } = Astro.props;
 const { data } = post;
 const isPhotos = data.template === 'photos';
+
+const localImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/posts/**/*.{jpg,jpeg,png,webp,gif,avif}',
+  { eager: true }
+);
+
+function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string {
+  if (src.startsWith('http') || src.startsWith('//')) return src;
+  const filename = src.startsWith('./') ? src.slice(2) : src;
+  const key = `/src/content/posts/${postSlug}/${filename}`;
+  return localImages[key]?.default ?? src;
+}
+
+const lightboxImages = isPhotos
+  ? data.images.map(img => {
+      const resolved = resolveImageSrc(post.slug, img.src);
+      return {
+        src: typeof resolved === 'string' ? resolved : resolved.src,
+        alt: img.alt,
+        caption: img.caption ?? null,
+      };
+    })
+  : [];
 ---
 
 <SiteLayout title={data.title} description={data.excerpt}>
@@ -29,7 +54,7 @@ const isPhotos = data.template === 'photos';
       </h1>
       {isPhotos && data.camera && (
         <div class="post-header__apparatus">
-          <span class="apparatus-label">Apparatus</span>
+          <span class="apparatus-label">Camera</span>
           <span class="apparatus-value">{data.camera}</span>
           {data.location && (
             <>
@@ -45,10 +70,11 @@ const isPhotos = data.template === 'photos';
     {isPhotos && data.images.length > 0 && (
       <div class="post-lead-image">
         <PostImageFrame
-          src={data.images[0].src}
+          src={resolveImageSrc(post.slug, data.images[0].src)}
           alt={data.images[0].alt}
           caption={data.images[0].caption}
           plateLabel={data.images[0].plateLabel}
+          lightboxIndex={0}
         />
       </div>
     )}
@@ -61,12 +87,13 @@ const isPhotos = data.template === 'photos';
     <!-- Additional photo gallery images -->
     {isPhotos && data.images.length > 1 && (
       <div class="post-gallery">
-        {data.images.slice(1).map(img => (
+        {data.images.slice(1).map((img, i) => (
           <PostImageFrame
-            src={img.src}
+            src={resolveImageSrc(post.slug, img.src)}
             alt={img.alt}
             caption={img.caption}
             plateLabel={img.plateLabel}
+            lightboxIndex={i + 1}
           />
         ))}
       </div>
@@ -80,6 +107,15 @@ const isPhotos = data.template === 'photos';
       </a>
     </div>
   </article>
+
+  {isPhotos && (
+    <>
+      <script is:inline define:vars={{ lightboxImages }}>
+        window.__LIGHTBOX_IMAGES__ = lightboxImages;
+      </script>
+      <Lightbox />
+    </>
+  )}
 </SiteLayout>
 
 <style>
@@ -127,7 +163,6 @@ const isPhotos = data.template === 'photos';
   }
 
   .post-header__title--photos {
-    font-style: italic;
     font-family: var(--font-body);
     font-weight: 400;
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -157,7 +192,8 @@ const isPhotos = data.template === 'photos';
   }
 
   .apparatus-sep {
-    color: var(--color-outline-variant);
+    font-size: 1rem;
+    color: var(--color-on-surface-variant);
   }
 
   .post-lead-image {

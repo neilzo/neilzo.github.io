@@ -16,13 +16,6 @@ const sharedPostFields = {
   entryNumber: z.string().optional(),
 };
 
-const imageSchema = z.object({
-  src: z.string(),
-  alt: z.string(),
-  caption: z.string().optional(),
-  plateLabel: z.string().optional(),
-});
-
 const posts = defineCollection({
   type: 'content',
   schema: z.discriminatedUnion('template', [
@@ -32,7 +25,12 @@ const posts = defineCollection({
     }),
     z.object({
       template: z.literal('photos'),
-      images: z.array(imageSchema),
+      images: z.array(z.object({
+        src: z.string(),
+        alt: z.string(),
+        caption: z.string().optional(),
+        plateLabel: z.string().optional(),
+      })),
       camera: z.string().optional(),
       location: z.string().optional(),
       rating: z.number().min(0).max(5).optional(),

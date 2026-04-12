@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import PostMeta from './PostMeta.astro';
 import PostImageFrame from './PostImageFrame.astro';
 
@@ -11,6 +12,18 @@ const { post, entryNum } = Astro.props;
 const { data, slug } = post;
 
 const firstImage = data.template === 'photos' ? data.images[0] : undefined;
+
+const localImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/posts/**/*.{jpg,jpeg,png,webp,gif,avif}',
+  { eager: true }
+);
+
+function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string {
+  if (src.startsWith('http') || src.startsWith('//')) return src;
+  const filename = src.startsWith('./') ? src.slice(2) : src;
+  const key = `/src/content/posts/${postSlug}/${filename}`;
+  return localImages[key]?.default ?? src;
+}
 ---
 
 <article class="post-card-photo">
@@ -24,7 +37,7 @@ const firstImage = data.template === 'photos' ? data.images[0] : undefined;
     {firstImage && (
       <a href={`/posts/${slug}`} class="post-card-photo__image-link" tabindex="-1" aria-hidden="true">
         <PostImageFrame
-          src={firstImage.src}
+          src={resolveImageSrc(slug, firstImage.src)}
           alt={firstImage.alt}
           plateLabel={firstImage.plateLabel}
         />
