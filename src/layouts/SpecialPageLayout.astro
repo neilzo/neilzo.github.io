@@ -1,0 +1,198 @@
+---
+import SiteLayout from './SiteLayout.astro';
+import { formatDate } from '../utils/formatDate';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  sectionLabel?: string;
+  updatedDate?: Date;
+  activeNav?: string;
+}
+const { title, subtitle, sectionLabel, updatedDate, activeNav } = Astro.props;
+---
+
+<SiteLayout {title} activeNav={activeNav ?? title}>
+  <div class="special-page">
+    <header class="special-header">
+      <div class="special-header__title-row">
+        <div class="special-header__accent"></div>
+        <h1 class="special-header__title">{title}</h1>
+      </div>
+      {subtitle && (
+        <p class="special-header__subtitle">{subtitle}</p>
+      )}
+      {updatedDate && (
+        <p class="special-header__updated">
+          Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
+        </p>
+      )}
+      <!--<div class="special-header__rule"></div>-->
+    </header>
+
+    <div class="special-body">
+      <slot />
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .special-page {
+    padding-top: 3rem;
+    max-width: 52rem;
+  }
+
+  .special-header {
+    margin-bottom: 5rem;
+  }
+
+  .special-header__label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .special-header__title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .special-header__accent {
+    width: 4px;
+    background: var(--color-secondary);
+    min-height: 3rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .special-header__title {
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .special-header__subtitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 0.75rem;
+    padding-left: calc(4px + 1.25rem);
+  }
+
+  .special-header__updated {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    margin: 0 0 1rem;
+    padding-left: calc(4px + 1.25rem);
+  }
+
+  .special-header__rule {
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.1;
+    margin-top: 1.5rem;
+  }
+
+  /* Markdown content styles */
+  .special-body {
+    counter-reset: section;
+  }
+
+  .special-body :global(h2) {
+    counter-increment: section;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 5rem 0 0.75rem;
+  }
+
+  .special-body :global(h2::before) {
+    content: counter(section, decimal-leading-zero) ".";
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    color: var(--color-secondary);
+    flex-shrink: 0;
+  }
+
+  .special-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .special-body :global(h3) {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0;
+  }
+
+  .special-body :global(p) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.375rem 0 0;
+  }
+
+  .special-body :global(ul) {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .special-body :global(li) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 0.375rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .special-body :global(ul li::before) {
+    content: '■';
+    color: var(--color-secondary);
+    font-size: 0.5em;
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+  }
+
+  /* Meta/creator line: italic-only paragraph immediately after h2 or h3 */
+  .special-body :global(h2 + p:has(> em:only-child)),
+  .special-body :global(h3 + p:has(> em:only-child)) {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    line-height: 1;
+    margin-top: 0.25rem;
+  }
+
+  .special-body :global(h2 + p:has(> em:only-child) > em),
+  .special-body :global(h3 + p:has(> em:only-child) > em) {
+    font-style: normal;
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+import { getEntry } from 'astro:content';
+import SpecialPageLayout from '../layouts/SpecialPageLayout.astro';
+
+const aboutEntry = await getEntry('about', 'index');
+const { Content } = await aboutEntry.render();
+const { tagline, links, updatedDate } = aboutEntry.data;
+---
+
+<SpecialPageLayout
+  title="About"
+  subtitle={tagline}
+  sectionLabel="The Record of the Person"
+  updatedDate={updatedDate}
+  activeNav="About"
+>
+  <div class="about-body">
+    <div class="about-prose prose">
+      <Content />
+    </div>
+
+    {links && links.length > 0 && (
+      <div class="about-links">
+        <h2 class="about-links__heading">Accounts</h2>
+        <div class="about-links__list">
+          {links.map(link => (
+            <div class="about-link">
+              <a href={link.url} class="about-link__label" target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+              {link.description && <p class="about-link__desc">{link.description}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</SpecialPageLayout>
+
+<style>
+  .about-body {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-body {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .about-prose {
+    /* uses .prose styles */
+  }
+
+  .about-links__heading {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    margin: 0 0 1.5rem;
+  }
+
+  .about-links__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-link {
+    border-left: 2px solid var(--color-outline-variant);
+    padding-left: 1rem;
+  }
+
+  .about-link__label {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    //color: var(--color-primary);
+    //text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .about-link__label:hover {
+    color: var(--color-secondary);
+  }
+
+  .about-link__desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+    margin: 0.25rem 0 0;
+  }
+</style>

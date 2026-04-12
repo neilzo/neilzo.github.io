@@ -1,0 +1,27 @@
+---
+interface Props {
+  vertical?: boolean;
+  class?: string;
+}
+const { vertical = false, class: className = '' } = Astro.props;
+---
+
+{vertical
+  ? <div class={`hairline hairline--vertical ${className}`} role="separator" aria-hidden="true"></div>
+  : <div class={`hairline hairline--horizontal ${className}`} role="separator" aria-hidden="true"></div>
+}
+
+<style>
+  .hairline--horizontal {
+    height: 1px;
+    width: 100%;
+    background: var(--color-outline-variant);
+    opacity: 0.4;
+  }
+  .hairline--vertical {
+    width: 1px;
+    height: 100%;
+    background: var(--color-outline-variant);
+    opacity: 0.4;
+  }
+</style>

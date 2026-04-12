@@ -1,0 +1,58 @@
+---
+interface Props {
+  label: string;
+  index?: string;
+}
+const { label, index } = Astro.props;
+---
+
+<section class="setup-cat">
+  <header class="setup-cat__header">
+    <div class="setup-cat__title-row">
+      {index && <span class="setup-cat__index">{index}.</span>}
+      <h2 class="setup-cat__title">{label}</h2>
+    </div>
+  </header>
+  <ul class="setup-cat__list">
+    <slot />
+  </ul>
+</section>
+
+<style>
+  .setup-cat {
+    margin-bottom: 3.5rem;
+  }
+
+  .setup-cat__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+  }
+
+  .setup-cat__index {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+  }
+
+  .setup-cat__title {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .setup-cat__list {
+    margin: 0;
+    padding: 0;
+  }
+</style>

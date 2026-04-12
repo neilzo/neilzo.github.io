@@ -1,0 +1,18 @@
+---
+import { getEntry } from 'astro:content';
+import SpecialPageLayout from '../layouts/SpecialPageLayout.astro';
+
+const entry = await getEntry('currently', 'index');
+const { Content } = await entry.render();
+const { title, subtitle, updatedDate } = entry.data;
+---
+
+<SpecialPageLayout
+  {title}
+  {subtitle}
+  sectionLabel="The Current State"
+  {updatedDate}
+  activeNav="Currently"
+>
+  <Content />
+</SpecialPageLayout>

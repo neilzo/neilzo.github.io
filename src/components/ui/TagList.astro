@@ -1,0 +1,23 @@
+---
+import TagBadge from './TagBadge.astro';
+
+interface Props {
+  tags: string[];
+  activeTag?: string;
+}
+const { tags, activeTag } = Astro.props;
+---
+
+<div class="tag-list">
+  {tags.map(tag => (
+    <TagBadge {tag} active={activeTag === tag} />
+  ))}
+</div>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+</style>

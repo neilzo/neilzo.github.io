@@ -1,0 +1,74 @@
+---
+interface Props {
+  name: string;
+  acquired?: string;
+}
+const { name, acquired } = Astro.props;
+---
+
+<li class="setup-item">
+  <div class="setup-item__header">
+    <span class="setup-item__name">{name}</span>
+    {acquired && <span class="setup-item__acquired">{acquired}</span>}
+  </div>
+  <div class="setup-item__desc">
+    <slot />
+  </div>
+</li>
+
+<style>
+  .setup-item {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 1.25rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .setup-item__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .setup-item__acquired {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    white-space: nowrap;
+  }
+
+  .setup-item__name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+  }
+
+  .setup-item__desc {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0.375rem 0 0;
+  }
+
+  .setup-item__desc :global(p) {
+    margin: 0;
+  }
+
+  .setup-item__desc :global(a) {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgb(166 93 70 / 0.45);
+  }
+
+  .setup-item__desc :global(a:hover) {
+    text-decoration-color: rgb(166 93 70 / 1);
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-wordmark">Neil Daftary</span>
+    <div class="footer-links">
+      <a href="/sitemap-index.xml">Sitemap</a>
+    </div>
+    <span class="footer-copy">© {year} Neil Daftary</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(23, 49, 36, 0.08);
+    margin-top: 6rem;
+    padding: 2rem 0 6rem;
+    background-color: var(--color-background);
+  }
+
+  @media (min-width: 768px) {
+    .site-footer {
+      padding-bottom: 2rem;
+    }
+  }
+
+  .footer-inner {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-outline);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-secondary);
+  }
+
+  .footer-copy {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+</style>

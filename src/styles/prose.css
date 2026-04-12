@@ -1,0 +1,165 @@
+/* MDX body typography */
+.prose {
+  font-family: var(--font-body);
+  color: var(--color-on-background);
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--color-outline-variant);
+  padding-bottom: 0.5rem;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  text-indent: 0;
+}
+
+.prose p + p {
+  /*text-indent: 2rem;*/
+}
+
+.prose a {
+  /* inherits global a style — secondary color, underline with offset */
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-secondary);
+  padding-left: 1.5rem;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--color-on-surface-variant);
+}
+
+.prose strong {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+  list-style: none;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.prose ul li::before,
+.prose ol li::before {
+  content: '■';
+  color: var(--color-secondary);
+  font-size: 0.625em;
+  position: absolute;
+  left: 0;
+  top: 0.475em;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-outline-variant);
+  margin: 3rem 0;
+}
+
+.prose code {
+  font-size: 0.875em;
+  background: var(--color-surface-container-high);
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--color-outline-variant);
+}
+
+.prose pre {
+  background: var(--color-inverse-surface);
+  color: var(--color-inverse-on-surface);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+/* Footnote tooltip styles */
+.fn-marker {
+  position: relative;
+  display: inline-block;
+  color: var(--color-secondary);
+  font-family: var(--font-label);
+  font-size: 0.65em;
+  font-weight: 700;
+  vertical-align: super;
+  cursor: default;
+  line-height: 1;
+  margin: 0 1px;
+}
+
+.fn-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 8px 12px;
+  min-width: 240px;
+  max-width: 320px;
+  white-space: normal;
+  z-index: 100;
+  border: 1px solid var(--color-outline-variant);
+  line-height: 1.5;
+  text-align: left;
+  pointer-events: none;
+}
+
+/* Arrow */
+.fn-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color-primary);
+}
+
+.fn-marker:hover .fn-tooltip,
+.fn-marker:focus .fn-tooltip {
+  display: block;
+}
+
+.fn-marker:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}

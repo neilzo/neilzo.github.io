@@ -1,0 +1,55 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import TagBadge from '../../components/ui/TagBadge.astro';
+import { ALL_TAGS } from '../../utils/getPostsByTag';
+---
+
+<SiteLayout title="Tags" activeNav="Tags">
+  <div class="tags-header">
+    <div class="tags-header__eyebrow">
+      <span class="tags-count">{ALL_TAGS.length} categories</span>
+    </div>
+    <div class="tags-header__rule"></div>
+  </div>
+
+  <div class="tags-list">
+    {ALL_TAGS.map(tag => (
+      <TagBadge {tag} />
+    ))}
+  </div>
+</SiteLayout>
+
+<style>
+  .tags-header {
+    padding-top: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tags-header__eyebrow {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .tags-count {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .tags-header__rule {
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.15;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+  }
+</style>

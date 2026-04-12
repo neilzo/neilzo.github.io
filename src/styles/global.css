@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #173124;
+  --color-secondary: #A65D46;
+  --color-surface: #fbf9f4;
+  --color-surface-bright: #fbf9f4;
+  --color-surface-dim: #dbdad5;
+  --color-surface-container: #f0eee9;
+  --color-surface-container-low: #f5f3ee;
+  --color-surface-container-high: #eae8e3;
+  --color-surface-container-highest: #e4e2dd;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #e4e2dd;
+  --color-surface-tint: #496455;
+  --color-background: #fbf9f4;
+  --color-on-background: #1b1c19;
+  --color-on-surface: #1b1c19;
+  --color-on-surface-variant: #424844;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #ffffff;
+  --color-outline: rgb(23 49 36 / 0.8);
+  --color-outline-variant: #c2c8c2;
+  --color-primary-container: #2d4739;
+  --color-primary-fixed: #ccead6;
+  --color-primary-fixed-dim: #b0cdbb;
+  --color-on-primary-container: #98b5a3;
+  --color-on-primary-fixed: #062014;
+  --color-on-primary-fixed-variant: #324c3e;
+  --color-secondary-container: #fe9e72;
+  --color-secondary-fixed: #ffdbcd;
+  --color-secondary-fixed-dim: #ffb596;
+  --color-on-secondary-container: #773310;
+  --color-on-secondary-fixed: #360f00;
+  --color-on-secondary-fixed-variant: #76320f;
+  --color-tertiary: #4b1f00;
+  --color-tertiary-container: #6d3000;
+  --color-tertiary-fixed: #ffdbc9;
+  --color-tertiary-fixed-dim: #ffb68c;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #f3985f;
+  --color-on-tertiary-fixed: #321200;
+  --color-on-tertiary-fixed-variant: #753401;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-inverse-surface: #30312e;
+  --color-inverse-on-surface: #f2f1ec;
+  --color-inverse-primary: #b0cdbb;
+
+  /* Typography */
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Newsreader", serif;
+  --font-label: "Manrope", sans-serif;
+
+  /* Border radius — zero everywhere per design system */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 9999px;
+}
+
+/* Architectural grid utility */
+@utility architectural-grid {
+  background-image:
+    linear-gradient(to right, rgba(23, 49, 36, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 49, 36, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Base resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(166 93 70 / 0.45);
+  transition: text-decoration-color 0.15s, color 0.15s;
+}
+
+a:hover {
+  text-decoration-color: rgb(166 93 70 / 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-secondary);
+  color: white;
+}

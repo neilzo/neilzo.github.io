@@ -1,0 +1,18 @@
+---
+import { getEntry } from 'astro:content';
+import SpecialPageLayout from '../layouts/SpecialPageLayout.astro';
+
+const entry = await getEntry('setup', 'index');
+const { Content } = await entry.render();
+const { title, subtitle, updatedDate } = entry.data;
+---
+
+<SpecialPageLayout
+  {title}
+  {subtitle}
+  {updatedDate}
+  sectionLabel="Index 004"
+  activeNav="Setup"
+>
+  <Content />
+</SpecialPageLayout>

@@ -1,0 +1,69 @@
+---
+interface Props {
+  activeLink?: string;
+}
+const { activeLink = '' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/currently', label: 'Currently' },
+  { href: '/favorites', label: 'Favorites' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+  {links.map(({ href, label }) => (
+    <a
+      href={href}
+      class={`mobile-nav-link${activeLink === label ? ' mobile-nav-link--active' : ''}`}
+      aria-current={activeLink === label ? 'page' : undefined}
+    >
+      {label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(251, 249, 244, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(23, 49, 36, 0.08);
+    z-index: 50;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-bottom-nav {
+      display: none;
+    }
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    height: 3rem;
+    color: rgba(23, 49, 36, 0.45);
+    text-decoration: none;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link--active {
+    color: var(--color-secondary);
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+  baseUrl: string;
+}
+const { prevUrl, nextUrl, currentPage, lastPage, baseUrl } = Astro.props;
+---
+
+{lastPage > 1 && (
+  <nav class="pagination" aria-label="Page navigation">
+    <a
+      href={prevUrl ?? '#'}
+      class={`pag-btn pag-btn--prev${!prevUrl ? ' pag-btn--disabled' : ''}`}
+      aria-disabled={!prevUrl}
+      aria-label="Previous page"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+    </a>
+
+    <div class="pag-pages">
+      {Array.from({ length: lastPage }, (_, i) => i + 1).map(page => (
+        <a
+          href={page === 1 ? '/' : `${baseUrl}/${page}`}
+          class={`pag-num${page === currentPage ? ' pag-num--active' : ''}`}
+          aria-current={page === currentPage ? 'page' : undefined}
+        >
+          {page}
+        </a>
+      ))}
+    </div>
+
+    <a
+      href={nextUrl ?? '#'}
+      class={`pag-btn pag-btn--next${!nextUrl ? ' pag-btn--disabled' : ''}`}
+      aria-disabled={!nextUrl}
+      aria-label="Next page"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+    </a>
+  </nav>
+)}
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .pag-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--color-outline-variant);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .pag-btn:hover:not(.pag-btn--disabled) {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+
+  .pag-btn--disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .pag-pages {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .pag-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--color-outline-variant);
+    color: var(--color-on-surface-variant);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+
+  .pag-num:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+
+  .pag-num--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    font-size: 1.125rem;
+  }
+</style>

@@ -1,0 +1,242 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import SiteLayout from './SiteLayout.astro';
+import TagList from '../components/ui/TagList.astro';
+import PostImageFrame from '../components/posts/PostImageFrame.astro';
+import Lightbox from '../components/posts/Lightbox.astro';
+import { formatDate } from '../utils/formatDate';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+const { post } = Astro.props;
+const { data } = post;
+const isPhotos = data.template === 'photos';
+
+const localImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/posts/**/*.{jpg,jpeg,png,webp,gif,avif}',
+  { eager: true }
+);
+
+function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string {
+  if (src.startsWith('http') || src.startsWith('//')) return src;
+  const filename = src.startsWith('./') ? src.slice(2) : src;
+  const key = `/src/content/posts/${postSlug}/${filename}`;
+  return localImages[key]?.default ?? src;
+}
+
+const lightboxImages = isPhotos
+  ? data.images.map(img => {
+      const resolved = resolveImageSrc(post.slug, img.src);
+      return {
+        src: typeof resolved === 'string' ? resolved : resolved.src,
+        alt: img.alt,
+        caption: img.caption ?? null,
+      };
+    })
+  : [];
+---
+
+<SiteLayout title={data.title} description={data.excerpt}>
+  <article class="post">
+    <!-- Editorial header -->
+    <header class="post-header">
+      <div class="post-header__meta">
+        <TagList tags={data.tags} />
+        <time class="post-header__date" datetime={data.date.toISOString()}>
+          {formatDate(data.date)}
+        </time>
+      </div>
+      <div class="post-header__accent"></div>
+      <h1 class={`post-header__title${isPhotos ? ' post-header__title--photos' : ''}`}>
+        {data.title}
+      </h1>
+      {isPhotos && data.camera && (
+        <div class="post-header__apparatus">
+          <span class="apparatus-label">Camera</span>
+          <span class="apparatus-value">{data.camera}</span>
+          {data.location && (
+            <>
+              <span class="apparatus-sep">·</span>
+              <span class="apparatus-value">{data.location}</span>
+            </>
+          )}
+        </div>
+      )}
+    </header>
+
+    <!-- Lead image for photo posts -->
+    {isPhotos && data.images.length > 0 && (
+      <div class="post-lead-image">
+        <PostImageFrame
+          src={resolveImageSrc(post.slug, data.images[0].src)}
+          alt={data.images[0].alt}
+          caption={data.images[0].caption}
+          plateLabel={data.images[0].plateLabel}
+          lightboxIndex={0}
+        />
+      </div>
+    )}
+
+    <!-- Body -->
+    <div class={`post-body prose${isPhotos ? ' post-body--photos' : ''}`}>
+      <slot />
+    </div>
+
+    <!-- Additional photo gallery images -->
+    {isPhotos && data.images.length > 1 && (
+      <div class="post-gallery">
+        {data.images.slice(1).map((img, i) => (
+          <PostImageFrame
+            src={resolveImageSrc(post.slug, img.src)}
+            alt={img.alt}
+            caption={img.caption}
+            plateLabel={img.plateLabel}
+            lightboxIndex={i + 1}
+          />
+        ))}
+      </div>
+    )}
+
+    <!-- Back link -->
+    <div class="post-back">
+      <a href="/" class="post-back__link">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        Back to Archive
+      </a>
+    </div>
+  </article>
+
+  {isPhotos && (
+    <>
+      <script is:inline define:vars={{ lightboxImages }}>
+        window.__LIGHTBOX_IMAGES__ = lightboxImages;
+      </script>
+      <Lightbox />
+    </>
+  )}
+</SiteLayout>
+
+<style>
+  .post {
+    padding-top: 3rem;
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+  }
+
+  .post-header__meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-header__date {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .post-header__accent {
+    width: 2.5rem;
+    height: 3px;
+    background: var(--color-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .post-header__title {
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    color: var(--color-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .post-header__title--photos {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .post-header__apparatus {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .apparatus-label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .apparatus-value {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  .apparatus-sep {
+    font-size: 1rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  .post-lead-image {
+    margin-bottom: 2.5rem;
+  }
+
+  .post-body {
+    /* prose styles applied via .prose class in prose.css */
+  }
+
+  .post-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .post-back {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 200, 194, 0.3);
+  }
+
+  .post-back__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .post-back__link:hover {
+    color: var(--color-secondary);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    font-size: 0.875rem;
+  }
+</style>

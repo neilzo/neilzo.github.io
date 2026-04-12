@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../../utils/formatDate';
+import TagList from '../ui/TagList.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  entryNum?: string;
+}
+const { post, entryNum: entryNumProp } = Astro.props;
+const { data } = post;
+const entryNum = entryNumProp ?? data.entryNumber;
+---
+
+<div class="post-meta">
+  {entryNum && (
+    <span class="meta-entry">Entry {entryNum}</span>
+  )}
+  <time class="meta-date" datetime={data.date.toISOString()}>
+    {formatDate(data.date)}
+  </time>
+  <div class="meta-rule"></div>
+  <TagList tags={data.tags} />
+  {data.template === 'photos' && data.camera && (
+    <div class="meta-block">
+      <span class="meta-label">Camera</span>
+      <span class="meta-value">{data.camera}</span>
+    </div>
+  )}
+  {data.template === 'photos' && data.location && (
+    <div class="meta-block">
+      <span class="meta-label">Location</span>
+      <span class="meta-value">{data.location}</span>
+    </div>
+  )}
+  {(data.template === 'review' || (data.template === 'photos' && data.rating !== undefined)) && (
+    <!--<div class="meta-block">-->
+    <!--  <span class="meta-label">Rating</span>-->
+    <!--  <span class="meta-value meta-rating" aria-label={`${data.rating} out of 5`}>-->
+    <!--    {Array.from({ length: 5 }, (_, i) => (-->
+    <!--      <span class={`star${i < (data.rating ?? 0) ? ' star&#45;&#45;filled' : ''}`} aria-hidden="true">-->
+    <!--        {i < (data.rating ?? 0) ? '★' : '☆'}-->
+    <!--      </span>-->
+    <!--    ))}-->
+    <!--  </span>-->
+    <!--</div>-->
+  )}
+</div>
+
+<style>
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-entry {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+  }
+
+  .meta-date {
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .meta-rule {
+    height: 1px;
+    width: 2rem;
+    background: var(--color-outline-variant);
+    margin: 0.25rem 0;
+  }
+
+  .meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: 0.5rem;
+  }
+
+  .meta-label {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  .meta-value {
+    font-family: var(--font-body);
+    font-size: 0.825rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  .meta-rating {
+    display: flex;
+    gap: 0.125rem;
+    font-size: 0.875rem;
+  }
+
+  .star--filled {
+    color: var(--color-secondary);
+  }
+</style>
