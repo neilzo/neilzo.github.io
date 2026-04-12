@@ -54,6 +54,49 @@ const fullTitle = title === 'Neil Daftary' ? title : `${title} — Neil Daftary`
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
 
     <title>{fullTitle}</title>
+
+    <!-- Linked Data for rich search results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "url": "https://neildaftary.com",
+        "name": "Neil Daftary",
+        "jobTitle": "Software Engineering Manager",
+        "description": "Creative Technologist",
+        "disambiguatingDescription": "Brainy creative based in New York",
+        "worksFor": [
+          {
+            "@type": "Organization",
+            "name": "Dealpath",
+            "sameAs": ["https://www.dealpath.com"]
+          }
+        ],
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "New York University",
+            "sameAs": "https://www.nyu.edu/"
+          }
+        ],
+        "sameAs": [
+          "https://twitter.com/neilzo",
+          "https://instagram.com/braveliltoasterr",
+          "https://github.com/neilzo",
+          "https://www.linkedin.com/in/neildaftary",
+          "https://codepen.io/neilzo",
+          "https://unsplash.com/@neilzo",
+          "https://angel.co/neil-daftary",
+          "https://neilzo.yelp.com",
+          "https://stackoverflow.com/users/3956863/neil-daftary",
+          "https://medium.com/@neilzo",
+          "https://keybase.io/neilzo",
+          "https://news.ycombinator.com/user?id=neilzo",
+          "https://www.quora.com/profile/Neil-Daftary",
+          "https://www.google.com/maps/contrib/103621734154703950582"
+        ]
+      }
+    </script>
   </head>
   <body>
     <slot />
