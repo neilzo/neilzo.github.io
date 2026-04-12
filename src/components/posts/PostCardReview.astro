@@ -13,7 +13,7 @@ const { data } = post;
 // Type guard — only render for review template
 if (data.template !== 'review') throw new Error('PostCardReview requires template: review');
 
-const { title, excerpt, rating } = data;
+const { title, excerpt, rating, category } = data;
 
 // Parse inline markdown: links, bold, italic
 function renderInline(text: string): string {
@@ -29,7 +29,7 @@ function renderInline(text: string): string {
     <PostMeta {post} {entryNum} />
   </div>
   <div class="review-card__body">
-    <!--<div class="review-card__label">— Micro Review</div>-->
+    <p class="review-card__label">Review / {category}</p>
     <h2 class="review-card__title">{title}</h2>
     <p class="review-card__text" set:html={renderInline(excerpt)} />
     <StarRating {rating} />
@@ -70,7 +70,7 @@ function renderInline(text: string): string {
     font-size: 0.625rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(23, 49, 36, 0.3);
+    color: var(--color-secondary);
   }
 
   .review-card__title {

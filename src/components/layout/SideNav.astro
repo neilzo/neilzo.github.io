@@ -5,23 +5,6 @@ interface Props {
   activeTag?: string;
 }
 const { activeTag } = Astro.props;
-
-const tagIcons: Record<string, string> = {
-  Writing: 'edit_note',
-  Photos: 'photo_camera',
-  Reviews: 'star',
-  Food: 'restaurant',
-  Games: 'sports_esports',
-  Movies: 'movie',
-  TV: 'tv',
-  Anime: 'animation',
-  Drinks: 'local_bar',
-  Books: 'menu_book',
-  Travel: 'flight',
-  Gear: 'construction',
-  Software: 'code',
-  'Tech Industry': 'business',
-};
 ---
 
 <aside class="sidenav" aria-label="Category navigation">

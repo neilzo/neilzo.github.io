@@ -4,6 +4,7 @@ export const ALL_TAGS = [
   'Writing', 'Photos', 'Reviews', 'Food', 'Games',
   'Movies', 'TV', 'Anime', 'Drinks', 'Books',
   'Travel', 'Gear', 'Software', 'Tech Industry',
+  'Thoughts'
 ] as const;
 
 export type Tag = typeof ALL_TAGS[number];

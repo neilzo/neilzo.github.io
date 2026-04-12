@@ -4,6 +4,7 @@ const TAGS = [
   'Writing', 'Photos', 'Reviews', 'Food', 'Games',
   'Movies', 'TV', 'Anime', 'Drinks', 'Books',
   'Travel', 'Gear', 'Software', 'Tech Industry',
+  'Thoughts'
 ] as const;
 
 const sharedPostFields = {
@@ -41,6 +42,7 @@ const posts = defineCollection({
       template: z.literal('review'),
       rating: z.number().min(0).max(5),
       excerpt: z.string(), // required — this is the full review text
+      category: z.enum(['Restaurant', 'Bar', 'Gear', 'Software', 'Movie', 'TV', 'Game', 'Book', 'Drink']),
       ...sharedPostFields,
     }),
   ]),
