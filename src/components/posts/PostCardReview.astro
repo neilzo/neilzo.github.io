@@ -34,19 +34,23 @@ function renderInline(text: string): string {
 }
 ---
 
-<article class="review-card">
+<article class={`review-card${isLongReview ? ' review-card--long' : ''}`}>
   <div class="review-card__meta">
     <PostMeta {post} {entryNum} />
   </div>
   <div class="review-card__body">
-    <p class="review-card__label">Review / {category}</p>
-    <h2 class="review-card__title">{title}</h2>
+    <p class="review-card__label">{!isLongReview && 'Mini'} Review / {category}</p>
+    <h2 class="review-card__title">
+      {isLongReview
+        ? <a href={`/posts/${post.slug}`}>{title}</a>
+        : title}
+    </h2>
     <p class="review-card__text" set:html={renderInline(excerpt)} />
     <StarRating {rating} />
     {isLongReview && (
-      <a href={`/posts/${post.slug}`} class="review-card__readmore">
-        Read more <span aria-hidden="true">→</span>
-      </a>
+      <div class="review-card__actions">
+        <a href={`/posts/${post.slug}`} class="review-card__cta">Read</a>
+      </div>
     )}
   </div>
 </article>
@@ -79,6 +83,13 @@ function renderInline(text: string): string {
     gap: 1rem;
   }
 
+  .review-card--long .review-card__body {
+    background: none;
+    border: none;
+    padding: 0;
+    gap: 0.875rem;
+  }
+
   .review-card__label {
     font-family: var(--font-label);
     font-weight: 700;
@@ -97,6 +108,22 @@ function renderInline(text: string): string {
     margin: 0;
   }
 
+  .review-card--long .review-card__title {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .review-card--long .review-card__title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .review-card--long .review-card__title a:hover {
+    color: var(--color-secondary);
+  }
+
   .review-card__text {
     font-family: var(--font-body);
     font-size: 1rem;
@@ -105,18 +132,32 @@ function renderInline(text: string): string {
     margin: 0;
   }
 
-  .review-card__readmore {
+  .review-card--long .review-card__text {
+    line-height: 1.7;
+    color: var(--color-on-surface-variant);
+  }
+
+  .review-card__actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .review-card__cta {
     font-family: var(--font-label);
     font-weight: 700;
     font-size: 0.75rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-secondary);
+    color: var(--color-primary);
     text-decoration: none;
+    border-bottom: 1px solid var(--color-secondary);
+    padding-bottom: 0.125rem;
+    transition: color 0.15s;
   }
 
-  .review-card__readmore:hover {
-    text-decoration: underline;
+  .review-card__cta:hover {
+    color: var(--color-secondary);
   }
 
 </style>

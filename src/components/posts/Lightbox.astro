@@ -129,6 +129,16 @@
     let images = [];
     let current = 0;
 
+    function buildImages() {
+      return [...document.querySelectorAll('[data-lightbox-index]')]
+        .sort((a, b) => parseInt(a.dataset.lightboxIndex) - parseInt(b.dataset.lightboxIndex))
+        .map(el => ({
+          src: el.dataset.lightboxSrc,
+          alt: el.dataset.lightboxAlt,
+          caption: el.dataset.lightboxCaption || '',
+        }));
+    }
+
     function show(index) {
       current = (index + images.length) % images.length;
       const item = images[current];
@@ -140,7 +150,7 @@
     }
 
     function open(index) {
-      images = window.__LIGHTBOX_IMAGES__ || [];
+      images = buildImages();
       if (!images.length) return;
       show(index);
       dialog.showModal();

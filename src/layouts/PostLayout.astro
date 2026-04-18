@@ -28,16 +28,6 @@ function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string 
   return localImages[key]?.default ?? src;
 }
 
-const lightboxImages = isPhotos
-  ? data.images.map(img => {
-      const resolved = resolveImageSrc(post.slug, img.src);
-      return {
-        src: typeof resolved === 'string' ? resolved : resolved.src,
-        alt: img.alt,
-        caption: img.caption ?? null,
-      };
-    })
-  : [];
 ---
 
 <SiteLayout title={data.title} description={data.excerpt}>
@@ -120,14 +110,12 @@ const lightboxImages = isPhotos
     </div>
   </article>
 
-  {isPhotos && (
-    <>
-      <script is:inline define:vars={{ lightboxImages }}>
-        window.__LIGHTBOX_IMAGES__ = lightboxImages;
-      </script>
-      <Lightbox />
-    </>
-  )}
+  <Lightbox />
+  <script is:inline>
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.fn-marker')) document.activeElement?.blur();
+    });
+  </script>
 </SiteLayout>
 
 <style>
@@ -186,13 +174,11 @@ const lightboxImages = isPhotos
     line-height: 1.6;
     color: rgba(23, 49, 36, 0.6);
     margin: 0.75rem 0 0;
-    font-style: italic;
   }
 
   .post-review-rating {
-    margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(194, 200, 194, 0.3);
+    //border-top: 1px solid rgba(194, 200, 194, 0.3);
   }
 
   .post-header__apparatus {

@@ -6,7 +6,7 @@ tags: [Software]
 excerpt: How I use AI to code
 ---
 
-A practical guide for how to use AI coding tools. I created this doc to help my team learn how to be more effective with AI code gen.
+A practical guide for how to use AI coding tools. I created this doc to help my team learn how to be more effective with AI code gen. While I use Claude personally, and work I use Codex. I find them largely comparable. I also included Cursor since most of reports use it.
 
 ## Do and don’t do:
 
@@ -36,13 +36,11 @@ The environment includes:
 * a planning workflow for larger changes
 * fast feedback loops with logging, linting, type checking, tests, and manual validation
 
-The move of these you add, the higher the quality and less iterations you have to go through.
+The move of these you add, the higher the quality and fewer iterations you have to go through.
 
 ## 1) Start with explicit repo rules
 
-One of the easiest improvements is giving the agent instructions it can reuse every time.
-
-That starts with an `AGENTS.md` file.
+One of the easiest improvements is giving the agent instructions it can reuse every time with an `AGENTS.md` file.
 
 I have mine saved in `~/.codex/` since it’s shared across repos. You can also create repo specific AGENTS.md if you’d like.
 
@@ -60,7 +58,7 @@ The more specific, short, and practical you make your rules, the better.
 
 ### Pair it with a principles doc
 
-Working agreements are for repeatable rules. Principles are for implementation constraints and style. This isn’t widely recommended, but I’ve found it helpful to limit complexity.
+`AGENTS.MD` is for repeatable rules. Principles are for implementation constraints and style. This isn’t widely recommended, but I’ve found it helpful to limit complexity.
 
 I keep a separate `principles.md` for things like:
 
@@ -71,7 +69,9 @@ I keep a separate `principles.md` for things like:
 * avoid framework coupling
 * when designing a feature or system, make it “Boring. Simple. Understandable.”
 
-I’ll link that separately, but the important pattern is:
+I use an [AI compacted version of this doc](https://github.com/zakirullin/cognitive-load), and stripped out the sections I didn't need.
+
+To summarize the difference:
 
 * `AGENTS.md` = short operational rules
 * `principles.md` = how to approach implementing large features or refactors
@@ -161,7 +161,7 @@ References:
 
 ## 4) Treat skills as reusable workflows
 
-Once you notice yourself repeating a workflow, it should probably stop living only in prompts.
+Once you notice yourself repeating a workflow or request, it should probably stop living only in prompts.
 
 OpenAI defines agent skills as reusable packages of instructions, resources, and optional scripts for task-specific workflows that can be shared across teams:
 https://developers.openai.com/codex/skills
@@ -169,7 +169,7 @@ https://developers.openai.com/codex/skills
 You can think of a skill as:
 
 * a durable prompt
-* plus the right supporting docs
+* plus supporting docs
 * plus any helper scripts or structure needed to make the workflow repeatable
 
 Good candidates for skills:
@@ -189,7 +189,7 @@ References:
 
 Subagents are useful if you want to increase the output of the agent by running multiple in parallel.
 
-OpenAI’s Codex docs describe subagents as specialized agents that can be spawned in parallel for complex work such as codebase exploration or multi-step feature plans, then consolidated into one response: https://developers.openai.com/codex/subagents
+OpenAI’s Codex docs describe subagents as specialized agents that can be spawned in parallel for complex work such as codebase exploration or multistep feature plans, then consolidated into one response: https://developers.openai.com/codex/subagents
 
 Possible subagents could be:
 
@@ -250,9 +250,8 @@ This is where AGENTS.md can help. For example, I want the agent to automatically
 * run `npx tsc`
 * run tests for affected files
 * run `bundle exec rubocop -A`
-* look at logs to validate changes, and if they don’t currently exist, add them before implementing a change.
 
-This allows the agent to run longer, with more autonomy, while reducing errors.
+This allows the agent to run longer while reducing errors.
 
 ### Consider using Red/green TDD
 

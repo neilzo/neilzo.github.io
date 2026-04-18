@@ -20,6 +20,9 @@ const hasLightbox = lightboxIndex !== undefined;
       <button
         class="image-frame__lightbox-trigger"
         data-lightbox-index={lightboxIndex}
+        data-lightbox-src={isLocal ? (src as ImageMetadata).src : src as string}
+        data-lightbox-alt={alt}
+        data-lightbox-caption={caption ?? ''}
         aria-label={`View larger: ${alt}`}
         type="button"
       >
@@ -53,7 +56,7 @@ const hasLightbox = lightboxIndex !== undefined;
 
 <style>
   .image-frame {
-    margin: 0;
+    margin: 0 0 2rem 0;
   }
 
   .image-frame__mat {
@@ -132,7 +135,6 @@ const hasLightbox = lightboxIndex !== undefined;
     font-family: var(--font-body);
     font-size: 0.875rem;
     color: var(--color-outline);
-    margin-top: 0.5rem;
-    padding-left: 0.25rem;
+    margin-top: 0.75rem;
   }
 </style>

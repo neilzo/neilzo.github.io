@@ -1,0 +1,84 @@
+---
+template: text
+title: "How I made this website"
+date: 2026-04-18
+tags: [Software]
+excerpt: The process
+---
+
+import PostImageFrame from '../../../components/posts/PostImageFrame.astro';
+import inspoImageDoor from './neil-daftary-5-QVqzn9t8M-unsplash.jpeg';
+import inspoBW from './neil-daftary-lzTiOr-NU1A-unsplash.jpeg';
+import inspoRed from './neil-daftary-nRWQVPfhL2c-unsplash.jpeg';
+import aboutV1 from './v1_about.jpg';
+import aboutFinal from './about_final.jpg';
+
+My previous website hadn't been updated in nearly ten years! I’ve wanted to get back into blogging and cataloging my life for quite some time, and with the rise of AI tools, the barrier to completing a project is the lowest it has been for me^(pouring one out for all the projects I started and stopped because I either got bored or bogged down in the implementations details).
+
+## Part one: planning
+
+The first step, whether you use AI code gen or not, is to write up a plan. My plan had:
+* The overall purpose of my site, i.e., it was a personal blog-like site.
+* The pages I wanted.
+* I wanted to tag posts so readers can filter to posts that most interest them.
+* Custom functionality like a footnote plugin. I overly abuse parentheses when I write, and footnotes are a cleaner way to support my bad habit.
+* The technologies I wanted to use. In this case, [Astro](https://astro.build/).
+* A minimal, geometric, architectural style. I knew I wanted something similar to the photos I like to take.
+
+## Part two: designing
+
+I’m not a designer^(yet) so I tried out Google’s new design tool, [Stitch](https://stitch.withgoogle.com/). I fed my plan and attached a few photos I selected from my library that I wanted the site to take inspiration from.
+
+<PostImageFrame
+  src={inspoImageDoor}
+  alt="Fascade of building with door and light"
+  caption="I chose it for the muted colors and the strong geometry and minimalism."
+/>
+
+<PostImageFrame
+  src={inspoBW}
+  alt="Fascade of drain on wall with tiles"
+  caption="You can see the grid paper like background eventually came from this."
+  lightboxIndex={0}
+/>
+
+<PostImageFrame
+  src={inspoRed}
+  alt="Fascade of fire alarm on wall"
+  caption="More minimalism and I knew I wanted to use red as my accent color."
+  lightboxIndex={1}
+/>
+
+The first pass wasn't terrible, but reeked of AI generation and was cringey as. For example, look at this pretentious AI slop:
+
+<PostImageFrame
+  src={aboutV1}
+  alt="My about page from the initial Stich design"
+  caption={`"We are, each of us, a living archive of every sunset we've ever watched and every hand we've ever held" 💀`}
+/>
+
+I didn't tell Stitch to generate with any kind of tone. Apparently based on my photos, I'm an unsufferable asshole.
+
+While the content was ass, I did like the colors, spacing, and minimalism. It took 17 iterations^(unfortunately, I deleted most of the iterations due to performance issues in Stitch), but what you see is generally what I was able to get out of Stitch. Most of the iterations were saying what I liked and wanted to be preserved, and what I wanted to change. First, the overall design, and after, page by page.
+
+Here is the final export of the About page I did. It's still pretentious, but planned to clean that up with my own content:
+
+<PostImageFrame
+  src={aboutFinal}
+  alt="My about page when I exported it"
+  caption="Unfortunately, the grid pattern you see on the site didn't export from Stitch to Figma correctly. There's also an artifact left of the sidebar that isn't in the export either. I exported to Figma to be able to easily convert the code to a jpg."
+/>
+
+What I learned:
+* Like with all AI prompting, the more examples you provide of what you want, the better the output is.
+* Without specific guardrails in the prompts, it would often inconsistently apply styles across pages. It might be due to the base model of Gemini Flash, but I haven’t had to provide this direct guidance with the state of the art coding models.
+* Its memory or context retention was poor. After a few iterations, it forgot that I didn’t want any cringey quotes.
+* The amount of times it said something like "Does this version feel like it finally hits the mark?" or "Does this feel like the perfect version of your site?" was annoying when it wasn’t.
+* Prompt it to provide multiple variations when you are unsure of what design direction to go.
+* Include specific requests for features or states. For example, in my plan and initial prompt I had listed a footnote feature, but it wasn't included in any of the designs until I asked for it.
+
+## Part three: implementation
+
+I export the designs as code and started Claude in plan mode. I fed the same plan I used in the design phase to Claude and include the exported code to use as a reference.
+
+
