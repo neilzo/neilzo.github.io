@@ -14,10 +14,20 @@ const { data } = post;
 if (data.template !== 'review') throw new Error('PostCardReview requires template: review');
 
 const { title, excerpt, rating, category } = data;
+const isLongReview = !!post.body?.trim();
 
-// Parse inline markdown: links, bold, italic
+// Parse inline markdown: links, bold, italic, footnote tooltips
 function renderInline(text: string): string {
-  return text
+  let counter = 0;
+  // Handle footnotes first (before other replacements that might consume parens)
+  const withFootnotes = text.replace(/\\\^\(([^)]+)\)|\^\(([^)]+)\)/g, (match, escaped, content) => {
+    if (escaped !== undefined) return `^(${escaped})`;
+    counter++;
+    const id = `fn-${counter}`;
+    const safe = content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return `<span class="fn-marker" tabindex="0" aria-describedby="${id}" data-fn="${counter}">[${counter}]<span id="${id}" role="tooltip" class="fn-tooltip" aria-hidden="true">${safe}</span></span>`;
+  });
+  return withFootnotes
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -33,6 +43,11 @@ function renderInline(text: string): string {
     <h2 class="review-card__title">{title}</h2>
     <p class="review-card__text" set:html={renderInline(excerpt)} />
     <StarRating {rating} />
+    {isLongReview && (
+      <a href={`/posts/${post.slug}`} class="review-card__readmore">
+        Read more <span aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </article>
 
@@ -88,6 +103,20 @@ function renderInline(text: string): string {
     line-height: 1.75;
     color: rgba(23, 49, 36, 0.8);
     margin: 0;
+  }
+
+  .review-card__readmore {
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+
+  .review-card__readmore:hover {
+    text-decoration: underline;
   }
 
 </style>

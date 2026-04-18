@@ -5,6 +5,7 @@ import SiteLayout from './SiteLayout.astro';
 import TagList from '../components/ui/TagList.astro';
 import PostImageFrame from '../components/posts/PostImageFrame.astro';
 import Lightbox from '../components/posts/Lightbox.astro';
+import StarRating from '../components/ui/StarRating.astro';
 import { formatDate } from '../utils/formatDate';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 const { post } = Astro.props;
 const { data } = post;
 const isPhotos = data.template === 'photos';
+const isReview = data.template === 'review';
 
 const localImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/posts/**/*.{jpg,jpeg,png,webp,gif,avif}',
@@ -52,6 +54,9 @@ const lightboxImages = isPhotos
       <h1 class={`post-header__title${isPhotos ? ' post-header__title--photos' : ''}`}>
         {data.title}
       </h1>
+      {isReview && data.excerpt && (
+        <p class="post-header__subtitle">{data.excerpt}</p>
+      )}
       {isPhotos && data.camera && (
         <div class="post-header__apparatus">
           <span class="apparatus-label">Camera</span>
@@ -83,6 +88,13 @@ const lightboxImages = isPhotos
     <div class={`post-body prose${isPhotos ? ' post-body--photos' : ''}`}>
       <slot />
     </div>
+
+    <!-- Rating for review posts -->
+    {isReview && (
+      <div class="post-review-rating">
+        <StarRating rating={data.rating} />
+      </div>
+    )}
 
     <!-- Additional photo gallery images -->
     {isPhotos && data.images.length > 1 && (
@@ -166,6 +178,21 @@ const lightboxImages = isPhotos
     font-family: var(--font-body);
     font-weight: 400;
     font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .post-header__subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(23, 49, 36, 0.6);
+    margin: 0.75rem 0 0;
+    font-style: italic;
+  }
+
+  .post-review-rating {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 200, 194, 0.3);
   }
 
   .post-header__apparatus {

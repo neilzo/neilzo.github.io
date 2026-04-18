@@ -36,7 +36,6 @@ const { pagePosts, currentPage, lastPage, totalPosts, entryNums } = Astro.props;
 <SiteLayout title={`Page ${currentPage} — The Ordered Archive`} activeNav="Home">
   <div class="feed-header">
     <div class="feed-header__eyebrow">
-      <span class="feed-issue">The Permanent Record</span>
       <span class="feed-count">{totalPosts} entries — Page {currentPage} of {lastPage}</span>
     </div>
     <div class="feed-header__rule"></div>
