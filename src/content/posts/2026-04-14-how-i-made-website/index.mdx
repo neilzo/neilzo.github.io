@@ -11,9 +11,10 @@ import inspoImageDoor from './neil-daftary-5-QVqzn9t8M-unsplash.jpeg';
 import inspoBW from './neil-daftary-lzTiOr-NU1A-unsplash.jpeg';
 import inspoRed from './neil-daftary-nRWQVPfhL2c-unsplash.jpeg';
 import aboutV1 from './v1_about.jpg';
-import aboutFinal from './about_final.jpg';
+import aboutFinal from './about_final.png';
+import aboutClaudeV1 from './about_claude_v1.png';
 
-My previous website hadn't been updated in nearly ten years! I’ve wanted to get back into blogging and cataloging my life for quite some time, and with the rise of AI tools, the barrier to completing a project is the lowest it has been for me^(pouring one out for all the projects I started and stopped because I either got bored or bogged down in the implementations details).
+My previous website hadn't been updated in nearly ten years! I’ve wanted to get back into blogging and cataloging my life for quite some time, and with the rise of AI tools, the barrier to completing a project is the lowest it’s ever been for me^(pouring one out for all the projects I started and stopped because I either got bored or bogged down in the implementation details).
 
 ## Part one: planning
 
@@ -53,24 +54,24 @@ The first pass wasn't terrible, but reeked of AI generation and was cringey as. 
 
 <PostImageFrame
   src={aboutV1}
-  alt="My about page from the initial Stich design"
+  alt="My about page from the initial Stitch design"
   caption={`"We are, each of us, a living archive of every sunset we've ever watched and every hand we've ever held" 💀`}
 />
 
-I didn't tell Stitch to generate with any kind of tone. Apparently based on my photos, I'm an unsufferable asshole.
+I didn't tell Stitch to generate with any kind of tone. Apparently, based on my photos, I'm an insufferable asshole.
 
-While the content was ass, I did like the colors, spacing, and minimalism. It took 17 iterations^(unfortunately, I deleted most of the iterations due to performance issues in Stitch), but what you see is generally what I was able to get out of Stitch. Most of the iterations were saying what I liked and wanted to be preserved, and what I wanted to change. First, the overall design, and after, page by page.
+While the content was ass, I did like the colors, spacing, and minimalism. It took 17 iterations^(unfortunately, I deleted most of the iterations due to performance issues in Stitch), but what you see is generally what I was able to get out of Stitch. Most of the iterations were saying what I liked and wanted to be preserved, and what I wanted to change. First, the overall design, then page by page.
 
-Here is the final export of the About page I did. It's still pretentious, but planned to clean that up with my own content:
+Here is the final export of the About page. It's still pretentious, but I planned to clean that up with my own content:
 
 <PostImageFrame
   src={aboutFinal}
   alt="My about page when I exported it"
-  caption="Unfortunately, the grid pattern you see on the site didn't export from Stitch to Figma correctly. There's also an artifact left of the sidebar that isn't in the export either. I exported to Figma to be able to easily convert the code to a jpg."
+  caption="Unfortunately, the grid pattern you see on the site isn't quite visible in the image, but it's there. Oddly, the sidebar is missing on this screen but is present on others. I didn't correct it for this reason."
 />
 
-What I learned:
-* Like with all AI prompting, the more examples you provide of what you want, the better the output is.
+What I learned and observed:
+* Like with all AI prompting, the more examples you provide of what you want, the better the output.
 * Without specific guardrails in the prompts, it would often inconsistently apply styles across pages. It might be due to the base model of Gemini Flash, but I haven’t had to provide this direct guidance with the state of the art coding models.
 * Its memory or context retention was poor. After a few iterations, it forgot that I didn’t want any cringey quotes.
 * The amount of times it said something like "Does this version feel like it finally hits the mark?" or "Does this feel like the perfect version of your site?" was annoying when it wasn’t.
@@ -79,6 +80,24 @@ What I learned:
 
 ## Part three: implementation
 
-I export the designs as code and started Claude in plan mode. I fed the same plan I used in the design phase to Claude and include the exported code to use as a reference.
+I exported the designs as code and images per page and started Claude in plan mode. I fed the same plan I used in the design phase to Claude and included the exported code and images for Claude to use as a reference.
 
+Here's the initial version Claude created for the About page:
+
+<PostImageFrame
+  src={aboutClaudeV1}
+  alt="Claude's first version of my about page"
+  caption="Ignore the black bar in the bottom left, that's an Astro dev tool."
+/>
+
+You can see Claude got the general idea, but even with code and sample images it made its own decisions^(not surprising, given AI is a probability machine). For example, it added icons to the sidebar, changed the layout of the page, and made its own footer. In this case, I actually liked most of the diversions, and kept most of them on the [current page](/about).
+
+Over many prompts, and some manual edits, I changed the site to my liking. I prompted Claude for larger changes, e.g. adding the lightbox or footnote functionality, while I made manual edits for small style changes like making text larger across the board or whitespace changes.
+
+
+## Final Thoughts on AI tools
+
+Stitch is a decent starting point, but it definitely doesn't replace human designers. It's great for small solo projects, but given how many errors and regressions it made, I doubt it will scale well with more complex or business to business products.
+
+Using Claude definitely saved me time and helped me complete the project, but it still took multiple days of two to four hours sessions each day refining the design and adding features I forgot to plan for. While I could have saved some effort with better planning, AI assisted coding is more of a 1.5x productivity booster than 2-5x for me.
 
