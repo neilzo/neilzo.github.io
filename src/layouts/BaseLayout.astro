@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = 'The personal site of Neil Daftary — writing, photography, and more.',
+  description = 'The personal site of Neil Daftary - musings, reviews, photography',
   ogImage,
   canonicalURL = Astro.url.href,
 } = Astro.props;
@@ -51,6 +51,7 @@ const fullTitle = title === 'Neil Daftary' ? title : `${title} — Neil Daftary`
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
+    <link rel="alternate" type="application/rss+xml" title="Neil Daftary" href={new URL("rss.xml", Astro.site)} />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
 
     <title>{fullTitle}</title>
