@@ -21,6 +21,24 @@ const { data, slug } = post;
     {data.excerpt && (
       <p class="post-card__excerpt">{data.excerpt}</p>
     )}
+    {'youtubeId' in data && data.youtubeId && (
+      <a
+        href={`https://www.youtube.com/watch?v=${data.youtubeId}`}
+        class="post-card__youtube-thumb"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Watch on YouTube"
+      >
+        <img
+          src={`https://img.youtube.com/vi/${data.youtubeId}/hqdefault.jpg`}
+          alt={`YouTube thumbnail for ${data.title}`}
+          loading="lazy"
+          width="480"
+          height="360"
+        />
+        <span class="post-card__youtube-play" aria-hidden="true">▶</span>
+      </a>
+    )}
     <div class="post-card__actions">
       <a href={`/posts/${slug}`} class="post-card__cta">Read</a>
     </div>
@@ -101,5 +119,35 @@ const { data, slug } = post;
 
   .post-card__cta:hover {
     color: var(--color-secondary);
+  }
+
+  .post-card__youtube-thumb {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 28rem;
+  }
+
+  .post-card__youtube-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .post-card__youtube-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.35);
+    transition: background 0.15s;
+  }
+
+  .post-card__youtube-thumb:hover .post-card__youtube-play {
+    background: rgba(0, 0, 0, 0.55);
   }
 </style>

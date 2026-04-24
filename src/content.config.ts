@@ -14,6 +14,7 @@ const sharedPostFields = {
   draft: z.boolean().default(false),
   excerpt: z.string().optional(),
   entryNumber: z.string().optional(),
+  youtubeId: z.string().optional(),
 };
 
 const posts = defineCollection({
