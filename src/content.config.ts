@@ -42,6 +42,7 @@ const posts = defineCollection({
       rating: z.number().min(0).max(5),
       excerpt: z.string(), // required — this is the full review text
       category: z.enum(['Restaurant', 'Bar', 'Gear', 'Software', 'Movie', 'TV', 'Game', 'Book', 'Drink']),
+      image: z.string().optional(),
       ...sharedPostFields,
     }),
   ]),

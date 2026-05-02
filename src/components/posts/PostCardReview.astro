@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import PostMeta from './PostMeta.astro';
+import PostImageFrame from './PostImageFrame.astro';
 import StarRating from '../ui/StarRating.astro';
 
 interface Props {
@@ -8,13 +10,25 @@ interface Props {
   entryNum?: string;
 }
 const { post, entryNum } = Astro.props;
-const { data } = post;
+const { data, slug } = post;
 
 // Type guard — only render for review template
 if (data.template !== 'review') throw new Error('PostCardReview requires template: review');
 
-const { title, excerpt, rating, category } = data;
+const { title, excerpt, rating, category, image } = data;
 const isLongReview = !!post.body?.trim();
+
+const localImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/posts/**/*.{jpg,jpeg,png,webp,gif,avif}',
+  { eager: true }
+);
+
+function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string {
+  if (src.startsWith('http') || src.startsWith('//')) return src;
+  const filename = src.startsWith('./') ? src.slice(2) : src;
+  const key = `/src/content/posts/${postSlug}/${filename}`;
+  return localImages[key]?.default ?? src;
+}
 
 // Parse inline markdown: links, bold, italic, footnote tooltips
 function renderInline(text: string): string {
@@ -38,20 +52,27 @@ function renderInline(text: string): string {
   <div class="review-card__meta">
     <PostMeta {post} {entryNum} />
   </div>
-  <div class="review-card__body">
-    <p class="review-card__label">{!isLongReview && 'Mini'} Review / {category}</p>
-    <h2 class="review-card__title">
-      {isLongReview
-        ? <a href={`/posts/${post.slug}`}>{title}</a>
-        : title}
-    </h2>
-    <p class="review-card__text" set:html={renderInline(excerpt)} />
-    <StarRating {rating} />
-    {isLongReview && (
-      <div class="review-card__actions">
-        <a href={`/posts/${post.slug}`} class="review-card__cta">Read</a>
+  <div class={`review-card__body${image ? ' review-card__body--with-image' : ''}`}>
+    {image && (
+      <div class="review-card__image-col">
+        <PostImageFrame src={resolveImageSrc(slug, image)} alt={title} />
       </div>
     )}
+    <div class="review-card__text-col">
+      <p class="review-card__label">{!isLongReview && 'Mini'} Review / {category}</p>
+      <h2 class="review-card__title">
+        {isLongReview
+          ? <a href={`/posts/${post.slug}`}>{title}</a>
+          : title}
+      </h2>
+      <p class="review-card__text" set:html={renderInline(excerpt)} />
+      <StarRating {rating} />
+      {isLongReview && (
+        <div class="review-card__actions">
+          <a href={`/posts/${post.slug}`} class="review-card__cta">Read</a>
+        </div>
+      )}
+    </div>
   </div>
 </article>
 
@@ -83,11 +104,42 @@ function renderInline(text: string): string {
     gap: 1rem;
   }
 
+  .review-card__body--with-image {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .review-card__image-col {
+    flex-shrink: 0;
+  }
+
+  .review-card__image-col :global(.image-frame) {
+    margin: 0;
+  }
+
+  .review-card__text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .review-card--long .review-card__body {
     background: none;
     border: none;
     padding: 0;
     gap: 0.875rem;
+  }
+
+  .review-card--long .review-card__text-col {
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 640px) {
+    .review-card__body--with-image {
+      grid-template-columns: 1fr;
+    }
   }
 
   .review-card__label {
