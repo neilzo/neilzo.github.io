@@ -45,6 +45,14 @@ const posts = defineCollection({
       image: z.string().optional(),
       ...sharedPostFields,
     }),
+    z.object({
+      template: z.literal('link'),
+      url: z.string().url(),
+      source: z.string().optional(),
+      quote: z.string().optional(),
+      excerpt: z.string(),
+      ...sharedPostFields,
+    }),
   ]),
 });
 

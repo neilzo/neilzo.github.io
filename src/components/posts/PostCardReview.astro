@@ -125,6 +125,10 @@ function renderInline(text: string): string {
     gap: 1rem;
   }
 
+  .review-card--long {
+    margin: 4rem 0 4rem 0;
+  }
+
   .review-card--long .review-card__body {
     background: none;
     border: none;
@@ -158,6 +162,19 @@ function renderInline(text: string): string {
     line-height: 1.25;
     color: var(--color-primary);
     margin: 0;
+  }
+
+  .review-card--long .review-card__title {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .review-card__title {
+      font-size: 1.875rem;
+    }
+    .review-card--long .review-card__title {
+      font-size: 2rem;
+    }
   }
 
   .review-card--long .review-card__title {

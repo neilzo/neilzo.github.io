@@ -83,10 +83,16 @@ function resolveImageSrc(postSlug: string, src: string): ImageMetadata | string 
   .post-card-photo__title {
     font-family: var(--font-headline);
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.5rem;
     line-height: 1.3;
     color: var(--color-primary);
     //margin: 0 0 1rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .post-card-photo__title {
+      font-size: 2rem;
+    }
   }
 
   .post-card-photo__title a {

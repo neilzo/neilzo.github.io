@@ -4,7 +4,10 @@ import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', (entry) =>
-    !entry.data.draft && (entry.data.template !== 'review' || !!entry.body?.trim())
+    !entry.data.draft && !(
+      (entry.data.template === 'review' || entry.data.template === 'link')
+      && !entry.body?.trim()
+    )
   );
   return posts.map(post => ({
     params: { slug: post.slug },

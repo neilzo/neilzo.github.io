@@ -3,6 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostCard from '../../components/posts/PostCard.astro';
 import PostCardPhoto from '../../components/posts/PostCardPhoto.astro';
 import PostCardReview from '../../components/posts/PostCardReview.astro';
+import PostCardLink from '../../components/posts/PostCardLink.astro';
 import Pagination from '../../components/ui/Pagination.astro';
 import { getAllPosts } from '../../utils/getAllPosts';
 import { computeEntryNumbers } from '../../utils/computeEntryNumbers';
@@ -47,7 +48,9 @@ const { pagePosts, currentPage, lastPage, totalPosts, entryNums } = Astro.props;
         ? <PostCardPhoto {post} entryNum={entryNums[post.id]} />
         : post.data.template === 'review'
           ? <PostCardReview {post} entryNum={entryNums[post.id]} />
-          : <PostCard {post} entryNum={entryNums[post.id]} />
+          : post.data.template === 'link'
+            ? <PostCardLink {post} entryNum={entryNums[post.id]} />
+            : <PostCard {post} entryNum={entryNums[post.id]} />
     ))}
   </div>
 
